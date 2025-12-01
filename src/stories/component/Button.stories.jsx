@@ -2,7 +2,7 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 
 export default {
-  title: 'Component/Button',
+  title: 'MUI Component/Button',
   component: Button,
   tags: ['autodocs'],
   parameters: {

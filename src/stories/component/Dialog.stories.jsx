@@ -18,7 +18,7 @@ import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 
 export default {
-  title: 'Component/Dialog',
+  title: 'MUI Component/Dialog',
   component: Dialog,
   tags: ['autodocs'],
   parameters: {

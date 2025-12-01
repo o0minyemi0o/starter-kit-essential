@@ -1,17 +1,24 @@
+/**
+ * Default Theme
+ *
+ * 프로젝트의 기본 디자인 토큰을 정의하는 표준 테마입니다.
+ * 피그마의 Design Tokens / Variables와 동일한 역할입니다.
+ *
+ * ## 핵심 철학
+ * - **Sharp Corners**: borderRadius 0 (날카로운 모서리)
+ * - **Dimmed Shadow**: offset 없이 blur만 사용하는 은은한 그림자
+ * - **Pure White**: 깔끔한 흰색 배경
+ * - **Brand Blue**: Primary 색상 #0000FF
+ */
+
 import { createTheme } from '@mui/material/styles';
 import { blueGrey, grey } from '@mui/material/colors';
-
-/**
- * 디자인 토큰 정의
- *
- * 이 파일은 프로젝트의 모든 디자인 토큰을 중앙에서 관리합니다.
- * 피그마의 Design Tokens / Variables와 동일한 역할입니다.
- */
 
 // ============================================================
 // 1. Color Tokens (색상 토큰)
 // ============================================================
 const palette = {
+  mode: 'light',
   // 브랜드 색상
   primary: {
     light: '#6666FF',
@@ -352,7 +359,7 @@ const components = {
 // ============================================================
 // Theme 생성
 // ============================================================
-const theme = createTheme({
+const defaultTheme = createTheme({
   palette,
   typography,
   spacing,
@@ -364,9 +371,64 @@ const theme = createTheme({
 });
 
 // 커스텀 속성 추가 (타입 확장 없이 접근 가능하도록)
-theme.customShadows = customShadows;
+defaultTheme.customShadows = customShadows;
 
-export default theme;
+/**
+ * 대시보드 스타일 설정 (Default)
+ */
+defaultTheme.dashboard = {
+  style: 'default',
+  iconStyle: 'outlined',
+  iconWeight: 400,
+  cardBorderRadius: 0,
+  cardColors: [
+    'linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF 100%)',
+    'linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF 100%)',
+    'linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF 100%)',
+    'linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF 100%)',
+    'linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF 100%)',
+    'linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF 100%)',
+  ],
+  subCardColors: [
+    'linear-gradient(to bottom, #FAFAFA 0%, #FAFAFA 100%)',
+    'linear-gradient(to bottom, #FAFAFA 0%, #FAFAFA 100%)',
+    'linear-gradient(to bottom, #FAFAFA 0%, #FAFAFA 100%)',
+    'linear-gradient(to bottom, #FAFAFA 0%, #FAFAFA 100%)',
+    'linear-gradient(to bottom, #FAFAFA 0%, #FAFAFA 100%)',
+    'linear-gradient(to bottom, #FAFAFA 0%, #FAFAFA 100%)',
+  ],
+  textColor: palette.text.primary,
+  textSecondary: palette.text.secondary,
+  textShadow: '0 0 0 rgba(0, 0, 0, 0)',
+  backdropFilter: 'blur(0px)',
+  WebkitBackdropFilter: 'blur(0px)',
+  border: '1px solid transparent',
+  borderColor: 'transparent',
+  shadow: customShadows.lg,
+  subBorder: '1px solid rgba(0, 0, 0, 0.06)',
+  subShadow: '0 0 0 rgba(0, 0, 0, 0)',
+  subBackdropFilter: 'blur(0px)',
+  subBorderRadius: 0,
+  dividerColor: 'rgba(0, 0, 0, 0.12)',
+  progressHeight: 6,
+  progressTrackColor: 'rgba(0, 0, 0, 0.08)',
+  progressBarColor: palette.primary.main,
+  progressGradient: false,
+  progressBorderRadius: 0,
+  background: '#FFFFFF',
+  atmosphere: 'linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF 100%)',
+  atmosphereOpacity: 0,
+  accentColor: palette.primary.main,
+  accentColors: {
+    wind: '#4DB6AC',
+    humidity: '#FFB74D',
+    uvIndex: '#FF8A65',
+    pressure: '#64B5F6',
+  },
+  blobs: null,
+};
+
+export default defaultTheme;
 
 // 개별 토큰 내보내기 (문서화용)
 export {

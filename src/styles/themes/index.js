@@ -5,6 +5,7 @@
  * 각 테마는 MUI createTheme 규격을 따릅니다.
  */
 
+import defaultTheme from './default';
 import pixelModernismTheme from './pixel-modernism';
 import colorPixelTheme from './color-pixel';
 import grey3dTheme from './grey-3d';
@@ -19,6 +20,7 @@ import liquidGlassTheme from './liquid-glass';
 
 /** 사용 가능한 테마 목록 */
 export const themes = {
+  default: defaultTheme,
   'pixel-modernism': pixelModernismTheme,
   'color-pixel': colorPixelTheme,
   'grey-3d': grey3dTheme,
@@ -34,6 +36,11 @@ export const themes = {
 
 /** 테마 메타데이터 */
 export const themeMeta = {
+  default: {
+    name: 'Default',
+    description: '프로젝트 기본 테마, 날카로운 모서리와 은은한 그림자',
+    mode: 'light',
+  },
   'pixel-modernism': {
     name: 'Pixel Modernism',
     description: '매킨토시 스타일의 흑백 픽셀 GUI',
@@ -98,7 +105,7 @@ export const themeMeta = {
  * @returns {object} MUI 테마 객체
  */
 export const getTheme = (themeName) => {
-  return themes[themeName] || themes.material;
+  return themes[themeName] || themes.default;
 };
 
 /**
@@ -108,5 +115,5 @@ export const getTheme = (themeName) => {
  */
 export const getThemeNames = () => Object.keys(themes);
 
-export { pixelModernismTheme, colorPixelTheme, grey3dTheme, aquaTheme, flatTheme, materialTheme, glassmorphismTheme, monolineDarkTheme, neubrutalismTheme, skeuomorphismTheme, liquidGlassTheme };
+export { defaultTheme, pixelModernismTheme, colorPixelTheme, grey3dTheme, aquaTheme, flatTheme, materialTheme, glassmorphismTheme, monolineDarkTheme, neubrutalismTheme, skeuomorphismTheme, liquidGlassTheme };
 export default themes;

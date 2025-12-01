@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
-import theme from './styles/theme';
+import { defaultTheme as theme } from './styles/themes';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';

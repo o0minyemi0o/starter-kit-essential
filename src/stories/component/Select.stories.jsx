@@ -12,7 +12,7 @@ import ListSubheader from '@mui/material/ListSubheader';
 import Typography from '@mui/material/Typography';
 
 export default {
-  title: 'Component/Select',
+  title: 'MUI Component/Select',
   component: Select,
   tags: ['autodocs'],
   parameters: {

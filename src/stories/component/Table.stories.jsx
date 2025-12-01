@@ -14,7 +14,7 @@ import Chip from '@mui/material/Chip';
 import { useState } from 'react';
 
 export default {
-  title: 'Component/Table',
+  title: 'MUI Component/Table',
   component: Table,
   tags: ['autodocs'],
   parameters: {

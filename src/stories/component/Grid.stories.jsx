@@ -4,13 +4,15 @@ import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: '#fff',
+  backgroundColor: theme.palette.grey[100],
   ...theme.typography.body2,
   padding: theme.spacing(2),
   textAlign: 'center',
-  color: (theme.vars ?? theme).palette.text.secondary,
+  color: theme.palette.text.secondary,
+  border: `1px solid ${theme.palette.grey[300]}`,
   ...theme.applyStyles('dark', {
     backgroundColor: '#1A2027',
+    borderColor: theme.palette.grey[700],
   }),
 }));
 
@@ -22,7 +24,7 @@ const ColoredItem = styled(Paper)(({ theme }) => ({
 }));
 
 export default {
-  title: 'Component/Grid',
+  title: 'MUI Component/Grid',
   component: Grid,
   tags: ['autodocs'],
   parameters: {
@@ -34,7 +36,19 @@ export default {
 
 MUI Grid v7 컴포넌트입니다.
 
-\`size\` prop을 사용하여 반응형 레이아웃을 구성합니다. 12컬럼 시스템을 기반으로 합니다.
+\`size\` prop을 사용하여 반응형 레이아웃을 구성합니다. **12컬럼 시스템**을 기반으로 합니다.
+
+### 12컬럼 시스템
+- 한 row의 컬럼 합은 항상 **12**입니다.
+- 합이 12를 초과하면 자동으로 다음 줄로 넘어갑니다.
+- 예: \`size={6}\` 2개 = 12 (한 줄), \`size={6}\` 3개 = 18 (두 줄로 분리)
+
+| 배치 | size 값 | 합계 |
+|------|---------|------|
+| 2등분 | 6 + 6 | 12 |
+| 3등분 | 4 + 4 + 4 | 12 |
+| 4등분 | 3 + 3 + 3 + 3 | 12 |
+| 사이드바 | 3 + 9 | 12 |
 
 ### 주요 변경사항 (v7)
 - \`xs\`, \`sm\`, \`md\` 등의 props 대신 \`size\` prop 사용
@@ -200,3 +214,4 @@ export const SpacingComparison = {
     </Box>
   ),
 };
+

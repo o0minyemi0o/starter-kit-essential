@@ -13,7 +13,7 @@ import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
 
 export default {
-  title: 'Component/Card',
+  title: 'MUI Component/Card',
   component: Card,
   tags: ['autodocs'],
   parameters: {
