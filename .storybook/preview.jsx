@@ -52,7 +52,9 @@ const preview = {
     (Story) => (
       <ThemeProvider theme={ theme }>
         <CssBaseline />
-        <Story />
+        <div style={ { display: 'flex', justifyContent: 'center', width: '100%', paddingTop: '40px' } }>
+          <Story />
+        </div>
       </ThemeProvider>
     ),
   ],
