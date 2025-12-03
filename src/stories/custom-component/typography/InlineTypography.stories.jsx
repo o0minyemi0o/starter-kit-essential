@@ -78,7 +78,7 @@ export const Documentation = {
       <DocumentTitle
         title="InlineTypography"
         status="Available"
-        note="텍스트 속에 이미지/아이콘을 삽입하는 컴포넌트"
+        note="Insert images/icons inline with text"
         brandName="Typography"
         systemName="Starter Kit"
         version="1.0"

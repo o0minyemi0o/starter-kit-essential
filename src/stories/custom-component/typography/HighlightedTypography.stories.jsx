@@ -60,7 +60,7 @@ export const Documentation = {
       <DocumentTitle
         title="HighlightedTypography"
         status="Available"
-        note="텍스트 강조 효과 컴포넌트"
+        note="Text highlighting effect component"
         brandName="Typography"
         systemName="Starter Kit"
         version="1.0"

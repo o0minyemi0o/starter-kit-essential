@@ -70,7 +70,7 @@ export const Documentation = {
       <DocumentTitle
         title="StretchedHeadline"
         status="Available"
-        note="단어 간격을 늘려 전체 너비를 채우는 히어로 타이포"
+        note="Hero typography that fills container width"
         brandName="Typography"
         systemName="Starter Kit"
         version="1.0"

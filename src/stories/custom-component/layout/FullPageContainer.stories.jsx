@@ -87,7 +87,7 @@ export const Documentation = {
       <DocumentTitle
         title="FullPageContainer"
         status="Available"
-        note="전체 화면 섹션 컨테이너"
+        note="Full screen section container"
         brandName="Layout"
         systemName="Starter Kit"
         version="1.0"

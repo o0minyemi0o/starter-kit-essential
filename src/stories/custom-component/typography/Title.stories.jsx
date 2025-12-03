@@ -91,7 +91,7 @@ export const Layouts = {
       <DocumentTitle
         title="Title"
         status="Available"
-        note="섹션/아이템의 계층적 타이틀 시스템"
+        note="Hierarchical title system for sections and items"
         brandName="Typography"
         systemName="Starter Kit"
         version="1.0"

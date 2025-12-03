@@ -102,7 +102,7 @@ export const Documentation = {
       <DocumentTitle
         title="BentoGrid"
         status="Available"
-        note="Apple 스타일 벤토 박스 레이아웃"
+        note="Apple-style bento box layout"
         brandName="Layout"
         systemName="Starter Kit"
         version="1.0"

@@ -242,7 +242,7 @@ export const Default = {
         <DocumentTitle
           title="Theme Overview"
           status="Available"
-          note="테마 전체 구조 탐색"
+          note="Complete theme structure explorer"
           brandName="Design System"
           systemName="Starter Kit"
           version="1.0"
@@ -366,7 +366,7 @@ export const TableView = {
         <DocumentTitle
           title="Token Tables"
           status="Available"
-          note="주요 토큰 요약 테이블"
+          note="Summary tables of key tokens"
           brandName="Design System"
           systemName="Starter Kit"
           version="1.0"

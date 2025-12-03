@@ -105,7 +105,7 @@ export const Documentation = {
       <DocumentTitle
         title="PhiSplit"
         status="Available"
-        note="황금비율 기반 2분할 레이아웃"
+        note="Golden ratio based two-column layout"
         brandName="Layout"
         systemName="Starter Kit"
         version="1.0"

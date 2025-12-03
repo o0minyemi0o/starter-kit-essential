@@ -84,7 +84,7 @@ export const Documentation = {
       <DocumentTitle
         title="StyledParagraph"
         status="Available"
-        note="섹션 강조를 위한 스타일링된 문단 컴포넌트"
+        note="Styled paragraph component for section emphasis"
         brandName="Typography"
         systemName="Starter Kit"
         version="1.0"

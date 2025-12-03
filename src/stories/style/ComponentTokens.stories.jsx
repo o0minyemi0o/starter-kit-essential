@@ -63,7 +63,7 @@ export const Default = {
         <DocumentTitle
           title="Component Tokens"
           status="Available"
-          note="컴포넌트별 테마 토큰 사용"
+          note="Theme token usage by component"
           brandName="Design System"
           systemName="Starter Kit"
           version="1.0"

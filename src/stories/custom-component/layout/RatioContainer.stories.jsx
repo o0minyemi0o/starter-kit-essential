@@ -78,7 +78,7 @@ export const Documentation = {
       <DocumentTitle
         title="RatioContainer"
         status="Available"
-        note="고정 종횡비 컨테이너 컴포넌트"
+        note="Fixed aspect ratio container component"
         brandName="Layout"
         systemName="Starter Kit"
         version="1.0"

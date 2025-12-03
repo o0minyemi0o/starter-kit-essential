@@ -112,7 +112,7 @@ export const Documentation = {
         <DocumentTitle
           title="ImageTransition"
           status="Available"
-          note="인덱스 기반 이미지 트랜지션 컴포넌트"
+          note="Index-based image transition component"
           brandName="Media"
           systemName="Starter Kit"
           version="1.0"

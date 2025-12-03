@@ -85,7 +85,7 @@ export const Documentation = {
       <DocumentTitle
         title="QuotedContainer"
         status="Available"
-        note="인용 부호를 텍스트에 배치하는 컴포넌트"
+        note="Place quote marks around text"
         brandName="Typography"
         systemName="Starter Kit"
         version="1.0"

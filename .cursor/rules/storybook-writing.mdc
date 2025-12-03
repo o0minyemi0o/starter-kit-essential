@@ -11,8 +11,10 @@ All stories MUST follow these rules:
 
 | Rule | Description |
 |------|-------------|
-| English Only | ALL story content (titles, descriptions, labels) MUST be written in English |
-| SectionTitle Usage | When a story has 2+ sections, MUST use `SectionTitle` to separate them |
+| DocumentTitle English | DocumentTitle의 모든 props (`title`, `status`, `note`, `brandName`, `systemName`) 값은 영어로 작성 |
+| Description Korean | DocumentTitle 외의 설명 (페이지 제목, 섹션 설명, 테이블 내용 등)은 한글로 작성 |
+| Props Table Required | 모든 스토리 Doc의 최상단에 컴포넌트 설명과 함께 Props 테이블을 표시 |
+| SectionTitle Usage | 2개 이상의 섹션이 있을 경우 반드시 `SectionTitle`로 구분 |
 
 ### Story Types
 
@@ -94,15 +96,15 @@ export const Doc = {
 
 ### DocumentTitle
 
-모든 스토리 상단에 고정 헤더로 문서 메타 정보를 표시한다.
+모든 스토리 상단에 고정 헤더로 문서 메타 정보를 표시한다. **모든 props 값은 영어로 작성한다.**
 
 ```jsx
 import { DocumentTitle } from '../../components/storybookDocumentation';
 
 <DocumentTitle
-  title="문서 제목"
+  title="Document Title"
   status="Available"
-  note="간단한 설명"
+  note="Brief description in English"
   brandName="Design System"
   systemName="Starter Kit"
   version="1.0"
@@ -129,9 +131,50 @@ import { PageContainer } from '../../components/storybookDocumentation';
 import { SectionTitle } from '../../components/storybookDocumentation';
 
 <SectionTitle
-  title="섹션 제목"
-  description="섹션에 대한 부가 설명 (선택)"
+  title="Props"
+  description="컴포넌트의 Props 목록입니다."
 />
+```
+
+---
+
+## Props 테이블 (필수)
+
+**모든 스토리 Doc의 최상단**에 컴포넌트 설명 직후 Props 테이블을 배치한다.
+
+### Props 테이블 구조
+
+| 컬럼 | 설명 |
+|------|------|
+| Prop | Props 이름 (monospace) |
+| Type | 데이터 타입 |
+| Default | 기본값 |
+| Description | 한글 설명 |
+
+### Props 테이블 템플릿
+
+```jsx
+<SectionTitle title="Props" description="컴포넌트의 Props 목록입니다." />
+<TableContainer>
+  <Table size="small">
+    <TableHead>
+      <TableRow>
+        <TableCell sx={ { fontWeight: 600 } }>Prop</TableCell>
+        <TableCell sx={ { fontWeight: 600 } }>Type</TableCell>
+        <TableCell sx={ { fontWeight: 600 } }>Default</TableCell>
+        <TableCell sx={ { fontWeight: 600 } }>Description</TableCell>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      <TableRow>
+        <TableCell sx={ { fontFamily: 'monospace' } }>propName</TableCell>
+        <TableCell>string</TableCell>
+        <TableCell>-</TableCell>
+        <TableCell>Props 설명 (한글)</TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+</TableContainer>
 ```
 
 ---
@@ -155,7 +198,7 @@ export default {
     docs: {
       description: {
         component: `
-## 문서 제목
+## Document Title
 
 한 문장 정의.
 
@@ -173,9 +216,9 @@ export const Default = {
   render: () => (
     <>
       <DocumentTitle
-        title="문서 제목"
+        title="Document Title"
         status="Available"
-        note="설명"
+        note="Brief description in English"
         brandName="Design System"
         systemName="Starter Kit"
         version="1.0"
@@ -187,6 +230,9 @@ export const Default = {
         <Typography variant="body1" color="text.secondary" sx={ { mb: 4 } }>
           페이지 설명
         </Typography>
+
+        <SectionTitle title="Props" description="컴포넌트의 Props 목록입니다." />
+        {/* Props Table - 필수 */}
 
         <SectionTitle title="섹션 1" />
         {/* Table 또는 콘텐츠 */}
@@ -368,12 +414,13 @@ Style 섹션은 디자인 토큰 문서이므로 단일 문서형 스토리를 �
 스토리 작성 완료 전 확인:
 
 ### MUST (Required)
-- [ ] All content written in English?
-- [ ] SectionTitle used for 2+ sections?
-- [ ] Correct story type used? (autodocs for components, Doc for documentation)
+- [ ] DocumentTitle props가 모두 영어로 작성되었는가?
+- [ ] 설명(페이지 제목, 섹션 설명, 테이블 내용)이 한글로 작성되었는가?
+- [ ] 최상단에 Props 테이블이 있는가?
+- [ ] 2개 이상의 섹션에 SectionTitle이 사용되었는가?
+- [ ] 올바른 스토리 타입이 사용되었는가? (autodocs for components, Doc for documentation)
 
 ### SHOULD (Recommended)
-- [ ] PageContainer wrapping content (for Doc stories)?
-- [ ] No Paper, Card, elevation decorations?
-- [ ] Props documented in Table format?
-- [ ] No excessive colors/decorations?
+- [ ] PageContainer로 콘텐츠가 감싸져 있는가? (Doc stories)
+- [ ] Paper, Card, elevation 장식이 없는가?
+- [ ] 불필요한 색상/장식이 없는가?

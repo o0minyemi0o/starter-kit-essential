@@ -152,7 +152,7 @@ export const Default = {
       <DocumentTitle
         title="VideoScrubbing"
         status="Available"
-        note="스크롤 기반 비디오 스크러빙"
+        note="Scroll-based video scrubbing"
         brandName="Design System"
         systemName="Starter Kit"
         version="1.0"
@@ -322,7 +322,7 @@ export const WithProgressCallback = {
       <DocumentTitle
         title="VideoScrubbing"
         status="Available"
-        note="onProgressChange 콜백 활용"
+        note="Using onProgressChange callback"
         brandName="Design System"
         systemName="Starter Kit"
         version="1.0"
@@ -347,7 +347,7 @@ export const WithContainerRef = {
       <DocumentTitle
         title="VideoScrubbing"
         status="Available"
-        note="containerRef 활용"
+        note="Using containerRef"
         brandName="Design System"
         systemName="Starter Kit"
         version="1.0"
@@ -372,7 +372,7 @@ export const AspectRatios = {
       <DocumentTitle
         title="VideoScrubbing"
         status="Available"
-        note="Aspect Ratio 변형"
+        note="Aspect ratio variations"
         brandName="Design System"
         systemName="Starter Kit"
         version="1.0"

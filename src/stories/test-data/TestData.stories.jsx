@@ -160,7 +160,7 @@ const TestDataGallery = () => {
       <DocumentTitle
         title="Test Data"
         status="Available"
-        note="Pexels 기반 테스트 이미지/비디오"
+        note="Pexels-based test images and videos"
         brandName="Design System"
         systemName="Starter Kit"
         version="1.0"
@@ -292,7 +292,7 @@ const randomImg = getRandomImage('product');
               </TableRow>
               <TableRow>
                 <TableCell sx={{ fontFamily: 'monospace', fontSize: 12 }}>getImagesByRatio(ratio)</TableCell>
-                <TableCell sx={{ fontSize: 13 }}>ratio: string (e.g. &apos;16/9&apos;)</TableCell>
+                <TableCell sx={{ fontSize: 13 }}>ratio: string (e.g. '16/9')</TableCell>
                 <TableCell sx={{ color: 'text.secondary', fontSize: 13 }}>특정 비율의 이미지만 필터링</TableCell>
               </TableRow>
               <TableRow>

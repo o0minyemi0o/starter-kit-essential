@@ -106,7 +106,7 @@ export const Documentation = {
       <DocumentTitle
         title="SplitScreen"
         status="Available"
-        note="화면 분할 레이아웃 컴포넌트"
+        note="Screen split layout component"
         brandName="Layout"
         systemName="Starter Kit"
         version="1.0"

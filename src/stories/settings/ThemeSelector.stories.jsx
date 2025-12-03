@@ -121,7 +121,7 @@ export const Default = {
         <DocumentTitle
           title="Theme Selector"
           status="Available"
-          note="테마 선택 및 미리보기"
+          note="Theme selection and preview"
           brandName="Design System"
           systemName="Starter Kit"
           version="1.0"
@@ -282,7 +282,7 @@ export const ThemeList = {
         <DocumentTitle
           title="Theme List"
           status="Available"
-          note="사용 가능한 테마 목록"
+          note="Available themes list"
           brandName="Design System"
           systemName="Starter Kit"
           version="1.0"

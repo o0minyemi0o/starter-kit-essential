@@ -95,7 +95,7 @@ export const Default = {
         <DocumentTitle
           title="Color System"
           status="Available"
-          note="색상 팔레트와 역할별 컬러 토큰"
+          note="Color palette and semantic color tokens"
           brandName="Design System"
           systemName="Starter Kit"
           version="1.0"
@@ -177,7 +177,7 @@ export const Palette = {
       <DocumentTitle
         title="Color Palette"
         status="Available"
-        note="MUI 기본 색상 팔레트"
+        note="MUI default color palette"
         brandName="Design System"
         systemName="Starter Kit"
         version="1.0"
@@ -335,7 +335,7 @@ export const SemanticTokens = {
         <DocumentTitle
           title="Semantic Tokens"
           status="Available"
-          note="역할별 의미 부여 색상"
+          note="Role-based semantic colors"
           brandName="Design System"
           systemName="Starter Kit"
           version="1.0"
@@ -421,7 +421,7 @@ export const Usage = {
       <DocumentTitle
         title="Color Usage"
         status="Available"
-        note="컴포넌트에서의 색상 활용법"
+        note="Color application in components"
         brandName="Design System"
         systemName="Starter Kit"
         version="1.0"

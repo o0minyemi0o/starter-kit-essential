@@ -99,7 +99,7 @@ export const Documentation = {
       <DocumentTitle
         title="ImageCarousel"
         status="Available"
-        note="스와이프/자동재생 이미지 캐러셀"
+        note="Swipe/autoplay image carousel"
         brandName="Media"
         systemName="Starter Kit"
         version="1.0"

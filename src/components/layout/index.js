@@ -11,9 +11,6 @@ export { RatioContainer, PHI } from './RatioContainer';
 // PhiSplit - 황금비율 2분할 레이아웃
 export { PhiSplit } from './PhiSplit';
 
-// SmartGrid - 자동 반응형 그리드
-export { SmartGrid, SmartGridItem } from './SmartGrid';
-
 // BentoGrid - 벤토 박스 그리드 레이아웃
 export { BentoGrid, BentoItem } from './BentoGrid';
 export { BENTO_PRESETS } from './bentoPresets';
