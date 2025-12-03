@@ -7,145 +7,24 @@ import SearchIcon from '@mui/icons-material/Search';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { AppShell } from '../../../components/navigation/AppShell';
 import { NavMenu } from '../../../components/navigation/NavMenu';
+import { DocumentTitle, PageContainer } from '../../../components/storybookDocumentation';
+import { SectionContainer } from '../../../components/container/SectionContainer';
 
-/**
- * Story 컴포넌트: Basic 데모
- */
-function BasicDemo() {
-  const [activeId, setActiveId] = useState('home');
+// Navigation Items (Orbit 스타일)
+const orbitNavItems = [
+  { id: 'dashboard', label: 'Team Pulse' },
+  { id: 'assets', label: 'Asset Library' },
+  { id: 'projects', label: 'Campaign Manager' },
+  { id: 'settings', label: 'Studio Config' },
+];
 
-  const menuItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'products', label: 'Products' },
-    { id: 'about', label: 'About' },
-    { id: 'contact', label: 'Contact' },
-  ];
-
-  return (
-    <Box sx={ { height: 500, border: '1px solid', borderColor: 'divider', borderRadius: 2, overflow: 'hidden' } }>
-      <AppShell
-        logo={
-          <Typography variant="h6" sx={ { fontWeight: 700 } }>
-            Brand
-          </Typography>
-        }
-        headerPersistent={
-          <IconButton size="small">
-            <AccountCircleIcon />
-          </IconButton>
-        }
-        headerCollapsible={
-          <NavMenu
-            items={ menuItems }
-            activeId={ activeId }
-            onItemClick={ (item) => setActiveId(item.id) }
-          />
-        }
-        breakpoint="md"
-      >
-        <Box sx={ { p: 4 } }>
-          <Typography variant="h4" sx={ { mb: 2 } }>
-            Welcome to { activeId.charAt(0).toUpperCase() + activeId.slice(1) }
-          </Typography>
-          <Typography color="text.secondary">
-            Resize the window to see responsive behavior.
-            On mobile, the navigation moves to a drawer menu.
-          </Typography>
-        </Box>
-      </AppShell>
-    </Box>
-  );
-}
-
-/**
- * Story 컴포넌트: Full Featured 데모
- */
-function FullFeaturedDemo() {
-  const [activeId, setActiveId] = useState('home');
-
-  const menuItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'products', label: 'Products' },
-    { id: 'services', label: 'Services' },
-    { id: 'about', label: 'About' },
-    { id: 'blog', label: 'Blog' },
-    { id: 'contact', label: 'Contact' },
-  ];
-
-  return (
-    <Box sx={ { height: 600, border: '1px solid', borderColor: 'divider', borderRadius: 2, overflow: 'hidden' } }>
-      <AppShell
-        logo={
-          <Box sx={ { display: 'flex', alignItems: 'center', gap: 1 } }>
-            <Box
-              sx={ {
-                width: 32,
-                height: 32,
-                borderRadius: 1,
-                backgroundColor: 'primary.main',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'white',
-                fontWeight: 700,
-                fontSize: 14,
-              } }
-            >
-              SK
-            </Box>
-            <Typography variant="subtitle1" sx={ { fontWeight: 600 } }>
-              Starter Kit
-            </Typography>
-          </Box>
-        }
-        headerPersistent={
-          <Box sx={ { display: 'flex', alignItems: 'center', gap: 1 } }>
-            <IconButton size="small">
-              <SearchIcon />
-            </IconButton>
-            <Button variant="contained" size="small" sx={ { display: { xs: 'none', sm: 'flex' } } }>
-              Get Started
-            </Button>
-          </Box>
-        }
-        headerCollapsible={
-          <NavMenu
-            items={ menuItems }
-            activeId={ activeId }
-            variant="underline"
-            onItemClick={ (item) => setActiveId(item.id) }
-          />
-        }
-        drawerFooter={
-          <Button variant="contained" fullWidth>
-            Get Started
-          </Button>
-        }
-        breakpoint="lg"
-      >
-        <Box
-          sx={ {
-            flex: 1,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: 'grey.50',
-          } }
-        >
-          <Box sx={ { textAlign: 'center', p: 4 } }>
-            <Typography variant="h3" sx={ { fontWeight: 700, mb: 2 } }>
-              { activeId.charAt(0).toUpperCase() + activeId.slice(1) } Page
-            </Typography>
-            <Typography color="text.secondary" sx={ { maxWidth: 400 } }>
-              This is the main content area. The AppShell provides a
-              responsive header with automatic drawer conversion on mobile.
-            </Typography>
-          </Box>
-        </Box>
-      </AppShell>
-    </Box>
-  );
-}
+// Navigation Items (기본)
+const basicNavItems = [
+  { id: 'home', label: 'Home' },
+  { id: 'products', label: 'Products' },
+  { id: 'about', label: 'About' },
+  { id: 'contact', label: 'Contact' },
+];
 
 export default {
   title: 'Custom Component/Navigation/AppShell',
@@ -153,108 +32,204 @@ export default {
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',
-    docs: {
-      description: {
-        component: `
-## AppShell
-
-A responsive application shell with header and main content areas.
-Automatically converts navigation to a drawer menu on mobile.
-
-### Features
-- Responsive header with breakpoint customization
-- Automatic mobile drawer conversion
-- Sticky header option
-- Transparent header mode for hero sections
-- Slot-based architecture for flexible composition
-        `,
-      },
-    },
-  },
-  argTypes: {
-    breakpoint: {
-      control: 'select',
-      options: ['sm', 'md', 'lg'],
-      description: 'Responsive breakpoint for drawer conversion',
-    },
-    headerHeight: {
-      control: { type: 'number', min: 48, max: 96 },
-      description: 'Header height in pixels',
-    },
-    drawerWidth: {
-      control: { type: 'number', min: 200, max: 400 },
-      description: 'Drawer width in pixels',
-    },
-    hasHeaderBorder: {
-      control: 'boolean',
-      description: 'Show header bottom border',
-    },
-    isHeaderSticky: {
-      control: 'boolean',
-      description: 'Make header sticky on scroll',
-    },
-    isHeaderTransparent: {
-      control: 'boolean',
-      description: 'Transparent header background',
-    },
   },
 };
 
 /**
- * Basic usage
+ * ## 기본 사용법
+ * 
+ * 반응형 애플리케이션 쉘입니다.
+ * 모바일에서는 자동으로 드로어 메뉴로 전환됩니다.
  */
 export const Default = {
-  render: () => <BasicDemo />,
+  render: () => (
+    <PageContainer>
+      <DocumentTitle
+        title="AppShell"
+        status="Ready"
+        note="반응형 애플리케이션 쉘 컴포넌트"
+        brandName="Navigation"
+        systemName="AppShell"
+        version="1.0"
+      />
+      <SectionContainer>
+        <Box sx={{ border: '1px solid', borderColor: 'divider', borderRadius: 2, overflow: 'hidden', height: 400 }}>
+          <AppShell
+            logo={
+              <Typography variant="h6" fontWeight={700} sx={{ letterSpacing: '-0.5px' }}>
+                Orbit.
+              </Typography>
+            }
+            headerPersistent={
+              <IconButton size="small">
+                <AccountCircleIcon />
+              </IconButton>
+            }
+            headerCollapsible={
+              <NavMenu
+                items={orbitNavItems}
+                activeId="dashboard"
+                variant="underline"
+              />
+            }
+          >
+            <Box sx={{ p: 4 }}>
+              <Typography variant="h4" fontWeight={700} gutterBottom>
+                Welcome to Dashboard
+              </Typography>
+              <Typography color="text.secondary">
+                화면 크기를 조절해보세요. 모바일에서는 네비게이션이 드로어 메뉴로 전환됩니다.
+              </Typography>
+            </Box>
+          </AppShell>
+        </Box>
+      </SectionContainer>
+    </PageContainer>
+  ),
 };
 
 /**
- * Full featured example
+ * ## 다양한 기능 조합
+ * 
+ * 검색, CTA 버튼, 드로어 푸터 등을 포함한 전체 기능 예시입니다.
  */
 export const FullFeatured = {
-  render: () => <FullFeaturedDemo />,
+  render: () => (
+    <PageContainer>
+      <DocumentTitle
+        title="AppShell - Full Featured"
+        status="Ready"
+        note="다양한 기능이 포함된 전체 구성 예시"
+        brandName="Navigation"
+        systemName="AppShell"
+        version="1.0"
+      />
+      <SectionContainer>
+        <Box sx={{ border: '1px solid', borderColor: 'divider', borderRadius: 2, overflow: 'hidden', height: 500 }}>
+          <AppShell
+            logo={
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Box
+                  sx={{
+                    width: 32,
+                    height: 32,
+                    borderRadius: 1,
+                    backgroundColor: 'primary.main',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'white',
+                    fontWeight: 700,
+                    fontSize: 14,
+                  }}
+                >
+                  SK
+                </Box>
+                <Typography variant="subtitle1" fontWeight={600}>
+                  Starter Kit
+                </Typography>
+              </Box>
+            }
+            headerPersistent={
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <IconButton size="small">
+                  <SearchIcon />
+                </IconButton>
+                <Button variant="contained" size="small" sx={{ display: { xs: 'none', sm: 'flex' } }}>
+                  Get Started
+                </Button>
+              </Box>
+            }
+            headerCollapsible={
+              <NavMenu
+                items={basicNavItems}
+                activeId="home"
+                variant="underline"
+              />
+            }
+            drawerFooter={
+              <Button variant="contained" fullWidth>
+                Get Started
+              </Button>
+            }
+            breakpoint="lg"
+          >
+            <Box
+              sx={{
+                flex: 1,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: 'grey.50',
+              }}
+            >
+              <Box sx={{ textAlign: 'center', p: 4 }}>
+                <Typography variant="h3" fontWeight={700} gutterBottom>
+                  Home Page
+                </Typography>
+                <Typography color="text.secondary" sx={{ maxWidth: 400 }}>
+                  메인 콘텐츠 영역입니다. AppShell이 반응형 헤더와 자동 드로어 변환을 제공합니다.
+                </Typography>
+              </Box>
+            </Box>
+          </AppShell>
+        </Box>
+      </SectionContainer>
+    </PageContainer>
+  ),
 };
 
 /**
- * Transparent header (for hero sections)
+ * ## 투명 헤더
+ * 
+ * Hero 섹션에 적합한 투명 헤더 모드입니다.
  */
 export const TransparentHeader = {
   render: () => (
-    <Box sx={ { height: 500, borderRadius: 2, overflow: 'hidden' } }>
-      <AppShell
-        logo={
-          <Typography variant="h6" sx={ { fontWeight: 700, color: 'white' } }>
-            Brand
-          </Typography>
-        }
-        headerCollapsible={
-          <NavMenu
-            items={ [
-              { id: 'home', label: 'Home' },
-              { id: 'about', label: 'About' },
-              { id: 'contact', label: 'Contact' },
-            ] }
-            activeId="home"
-            sx={ { '& button': { color: 'white' } } }
-          />
-        }
-        isHeaderTransparent
-        hasHeaderBorder={ false }
-      >
-        <Box
-          sx={ {
-            flex: 1,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
-            color: 'white',
-          } }
-        >
-          <Typography variant="h2" sx={ { fontWeight: 700 } }>
-            Hero Section
-          </Typography>
+    <PageContainer>
+      <DocumentTitle
+        title="AppShell - Transparent Header"
+        status="Ready"
+        note="Hero 섹션에 적합한 투명 헤더 모드"
+        brandName="Navigation"
+        systemName="AppShell"
+        version="1.0"
+      />
+      <SectionContainer>
+        <Box sx={{ borderRadius: 2, overflow: 'hidden', height: 400 }}>
+          <AppShell
+            logo={
+              <Typography variant="h6" fontWeight={700} sx={{ color: 'white' }}>
+                Brand
+              </Typography>
+            }
+            headerCollapsible={
+              <NavMenu
+                items={basicNavItems}
+                activeId="home"
+                sx={{ '& button': { color: 'white' } }}
+              />
+            }
+            isHeaderTransparent
+            hasHeaderBorder={false}
+          >
+            <Box
+              sx={{
+                flex: 1,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
+                color: 'white',
+              }}
+            >
+              <Typography variant="h2" fontWeight={700}>
+                Hero Section
+              </Typography>
+            </Box>
+          </AppShell>
         </Box>
-      </AppShell>
-    </Box>
+      </SectionContainer>
+    </PageContainer>
   ),
 };

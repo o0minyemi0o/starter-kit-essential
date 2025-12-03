@@ -3,7 +3,8 @@ import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 /**
  * CarouselContainer 컴포넌트
@@ -272,7 +273,7 @@ const CarouselContainer = forwardRef(function CarouselContainer({
               left: navOffset,
             }}
           >
-            <IconChevronLeft size={iconSize} stroke={1.5} />
+            <ChevronLeftIcon sx={{ fontSize: iconSize }} />
           </IconButton>
 
           <IconButton
@@ -284,7 +285,7 @@ const CarouselContainer = forwardRef(function CarouselContainer({
               right: navOffset,
             }}
           >
-            <IconChevronRight size={iconSize} stroke={1.5} />
+            <ChevronRightIcon sx={{ fontSize: iconSize }} />
           </IconButton>
         </>
       )}

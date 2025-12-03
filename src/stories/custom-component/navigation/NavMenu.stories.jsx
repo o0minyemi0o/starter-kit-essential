@@ -2,99 +2,138 @@ import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
+import CampaignIcon from '@mui/icons-material/Campaign';
+import SettingsIcon from '@mui/icons-material/Settings';
 import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import WorkIcon from '@mui/icons-material/Work';
 import MailIcon from '@mui/icons-material/Mail';
-import SettingsIcon from '@mui/icons-material/Settings';
 import { NavMenu } from '../../../components/navigation/NavMenu';
+import { DocumentTitle, PageContainer } from '../../../components/storybookDocumentation';
+import { SectionContainer } from '../../../components/container/SectionContainer';
+
+// Orbit Navigation Items
+const orbitNavItems = [
+  { id: 'dashboard', label: 'Team Pulse', icon: <DashboardIcon /> },
+  { id: 'assets', label: 'Asset Library', icon: <PhotoLibraryIcon /> },
+  { id: 'projects', label: 'Campaign Manager', icon: <CampaignIcon /> },
+  { id: 'settings', label: 'Studio Config', icon: <SettingsIcon /> },
+];
+
+// Basic Navigation Items
+const basicNavItems = [
+  { id: 'home', label: 'Home', icon: <HomeIcon /> },
+  { id: 'about', label: 'About', icon: <InfoIcon /> },
+  { id: 'work', label: 'Work', icon: <WorkIcon /> },
+  { id: 'contact', label: 'Contact', icon: <MailIcon /> },
+];
 
 /**
- * Story 컴포넌트: Interactive 데모
+ * Story Component: Interactive Demo
  */
 function InteractiveDemo() {
-  const [activeId, setActiveId] = useState('home');
-
-  const items = [
-    { id: 'home', label: 'Home', icon: <HomeIcon /> },
-    { id: 'about', label: 'About', icon: <InfoIcon /> },
-    { id: 'work', label: 'Work', icon: <WorkIcon /> },
-    { id: 'contact', label: 'Contact', icon: <MailIcon /> },
-  ];
+  const [activeId, setActiveId] = useState('dashboard');
 
   return (
-    <Box sx={ { p: 4 } }>
-      <NavMenu
-        items={ items }
-        activeId={ activeId }
-        onItemClick={ (item) => setActiveId(item.id) }
+    <PageContainer>
+      <DocumentTitle
+        title="NavMenu - Interactive"
+        status="Ready"
+        note="Click to change active state"
+        brandName="Navigation"
+        systemName="NavMenu"
+        version="1.0"
       />
-      <Typography variant="body2" sx={ { mt: 3, color: 'text.secondary' } }>
-        Active: { activeId }
-      </Typography>
-    </Box>
+      <SectionContainer>
+        <NavMenu
+          items={orbitNavItems}
+          activeId={activeId}
+          variant="underline"
+          onItemClick={(item) => setActiveId(item.id)}
+        />
+        <Typography variant="body2" sx={{ mt: 3, color: 'text.secondary' }}>
+          Active: {activeId}
+        </Typography>
+      </SectionContainer>
+    </PageContainer>
   );
 }
 
 /**
- * Story 컴포넌트: Variants 데모
+ * Story Component: Variants Demo
  */
 function VariantsDemo() {
-  const [activeId, setActiveId] = useState('home');
-
-  const items = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'work', label: 'Work' },
-    { id: 'contact', label: 'Contact' },
-  ];
+  const [activeId, setActiveId] = useState('dashboard');
 
   return (
-    <Stack spacing={ 4 } sx={ { p: 4 } }>
-      { ['default', 'pills', 'underline'].map((variant) => (
-        <Box key={ variant }>
-          <Typography
-            variant="caption"
-            sx={ { mb: 1.5, display: 'block', color: 'text.secondary', textTransform: 'uppercase' } }
-          >
-            { variant }
-          </Typography>
-          <NavMenu
-            items={ items }
-            activeId={ activeId }
-            variant={ variant }
-            onItemClick={ (item) => setActiveId(item.id) }
-          />
-        </Box>
-      )) }
-    </Stack>
+    <PageContainer>
+      <DocumentTitle
+        title="NavMenu - Variants"
+        status="Ready"
+        note="Different style variants"
+        brandName="Navigation"
+        systemName="NavMenu"
+        version="1.0"
+      />
+      <SectionContainer>
+        <Stack spacing={4}>
+          {['default', 'pills', 'underline'].map((variant) => (
+            <Box key={variant}>
+              <Typography
+                variant="caption"
+                sx={{ mb: 1.5, display: 'block', color: 'text.secondary', textTransform: 'uppercase' }}
+              >
+                {variant}
+              </Typography>
+              <NavMenu
+                items={orbitNavItems}
+                activeId={activeId}
+                variant={variant}
+                onItemClick={(item) => setActiveId(item.id)}
+              />
+            </Box>
+          ))}
+        </Stack>
+      </SectionContainer>
+    </PageContainer>
   );
 }
 
 /**
- * Story 컴포넌트: Vertical 데모
+ * Story Component: Vertical Demo
  */
 function VerticalDemo() {
-  const [activeId, setActiveId] = useState('home');
+  const [activeId, setActiveId] = useState('dashboard');
 
   const items = [
-    { id: 'home', label: 'Home', icon: <HomeIcon /> },
-    { id: 'about', label: 'About', icon: <InfoIcon /> },
-    { id: 'work', label: 'Work', icon: <WorkIcon /> },
-    { id: 'contact', label: 'Contact', icon: <MailIcon /> },
-    { id: 'settings', label: 'Settings', icon: <SettingsIcon />, disabled: true },
+    ...orbitNavItems,
+    { id: 'disabled', label: 'Disabled Item', icon: <SettingsIcon />, disabled: true },
   ];
 
   return (
-    <Box sx={ { p: 4, maxWidth: 240 } }>
-      <NavMenu
-        items={ items }
-        activeId={ activeId }
-        orientation="vertical"
-        variant="default"
-        onItemClick={ (item) => setActiveId(item.id) }
+    <PageContainer>
+      <DocumentTitle
+        title="NavMenu - Vertical"
+        status="Ready"
+        note="Sidebar navigation style"
+        brandName="Navigation"
+        systemName="NavMenu"
+        version="1.0"
       />
-    </Box>
+      <SectionContainer>
+        <Box sx={{ maxWidth: 280 }}>
+          <NavMenu
+            items={items}
+            activeId={activeId}
+            orientation="vertical"
+            variant="default"
+            onItemClick={(item) => setActiveId(item.id)}
+          />
+        </Box>
+      </SectionContainer>
+    </PageContainer>
   );
 }
 
@@ -103,68 +142,33 @@ export default {
   component: NavMenu,
   tags: ['autodocs'],
   parameters: {
-    layout: 'centered',
-    docs: {
-      description: {
-        component: `
-## NavMenu
-
-A versatile navigation menu component for headers, sidebars, and drawers.
-Supports horizontal and vertical orientations with multiple style variants.
-
-### Features
-- Multiple variants: default, pills, underline
-- Horizontal and vertical orientation
-- Icon + text combination
-- Active state indication
-- Disabled items support
-        `,
-      },
-    },
-  },
-  argTypes: {
-    orientation: {
-      control: 'radio',
-      options: ['horizontal', 'vertical'],
-      description: 'Menu orientation',
-    },
-    variant: {
-      control: 'select',
-      options: ['default', 'pills', 'underline'],
-      description: 'Visual style variant',
-    },
-    size: {
-      control: 'radio',
-      options: ['sm', 'md', 'lg'],
-      description: 'Menu item size',
-    },
-    isIconOnly: {
-      control: 'boolean',
-      description: 'Show only icons',
-    },
-    hasIconStart: {
-      control: 'boolean',
-      description: 'Place icon before label',
-    },
+    layout: 'fullscreen',
   },
 };
 
 /**
- * Default horizontal menu
+ * Default horizontal menu with Orbit style
  */
 export const Default = {
-  args: {
-    items: [
-      { id: 'home', label: 'Home', icon: <HomeIcon /> },
-      { id: 'about', label: 'About', icon: <InfoIcon /> },
-      { id: 'work', label: 'Work', icon: <WorkIcon /> },
-      { id: 'contact', label: 'Contact', icon: <MailIcon /> },
-    ],
-    activeId: 'home',
-    orientation: 'horizontal',
-    variant: 'default',
-    size: 'md',
-  },
+  render: () => (
+    <PageContainer>
+      <DocumentTitle
+        title="NavMenu"
+        status="Ready"
+        note="Navigation menu component for headers and sidebars"
+        brandName="Navigation"
+        systemName="NavMenu"
+        version="1.0"
+      />
+      <SectionContainer>
+        <NavMenu
+          items={orbitNavItems}
+          activeId="dashboard"
+          variant="underline"
+        />
+      </SectionContainer>
+    </PageContainer>
+  ),
 };
 
 /**
@@ -193,19 +197,24 @@ export const Vertical = {
  */
 export const IconOnly = {
   render: () => (
-    <Box sx={ { p: 4 } }>
-      <NavMenu
-        items={ [
-          { id: 'home', label: 'Home', icon: <HomeIcon /> },
-          { id: 'about', label: 'About', icon: <InfoIcon /> },
-          { id: 'work', label: 'Work', icon: <WorkIcon /> },
-          { id: 'settings', label: 'Settings', icon: <SettingsIcon /> },
-        ] }
-        activeId="home"
-        isIconOnly
-        variant="pills"
+    <PageContainer>
+      <DocumentTitle
+        title="NavMenu - Icon Only"
+        status="Ready"
+        note="Compact icon-only navigation"
+        brandName="Navigation"
+        systemName="NavMenu"
+        version="1.0"
       />
-    </Box>
+      <SectionContainer>
+        <NavMenu
+          items={orbitNavItems}
+          activeId="dashboard"
+          isIconOnly
+          variant="pills"
+        />
+      </SectionContainer>
+    </PageContainer>
   ),
 };
 
@@ -214,27 +223,35 @@ export const IconOnly = {
  */
 export const Sizes = {
   render: () => (
-    <Stack spacing={ 4 } sx={ { p: 4 } }>
-      { ['sm', 'md', 'lg'].map((size) => (
-        <Box key={ size }>
-          <Typography
-            variant="caption"
-            sx={ { mb: 1, display: 'block', color: 'text.secondary' } }
-          >
-            { size.toUpperCase() }
-          </Typography>
-          <NavMenu
-            items={ [
-              { id: 'home', label: 'Home' },
-              { id: 'about', label: 'About' },
-              { id: 'work', label: 'Work' },
-            ] }
-            activeId="home"
-            size={ size }
-            variant="pills"
-          />
-        </Box>
-      )) }
-    </Stack>
+    <PageContainer>
+      <DocumentTitle
+        title="NavMenu - Sizes"
+        status="Ready"
+        note="Size comparison: sm, md, lg"
+        brandName="Navigation"
+        systemName="NavMenu"
+        version="1.0"
+      />
+      <SectionContainer>
+        <Stack spacing={4}>
+          {['sm', 'md', 'lg'].map((size) => (
+            <Box key={size}>
+              <Typography
+                variant="caption"
+                sx={{ mb: 1, display: 'block', color: 'text.secondary' }}
+              >
+                {size.toUpperCase()}
+              </Typography>
+              <NavMenu
+                items={orbitNavItems}
+                activeId="dashboard"
+                size={size}
+                variant="pills"
+              />
+            </Box>
+          ))}
+        </Stack>
+      </SectionContainer>
+    </PageContainer>
   ),
 };

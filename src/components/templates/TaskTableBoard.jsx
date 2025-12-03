@@ -7,11 +7,13 @@ import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import { AdvancedTable } from '../orbit/data/AdvancedTable';
 import { projectData } from '../orbit/data/mock';
-import { SectionContainer } from '../container/SectionContainer';
 
 /**
  * TaskTableBoard
  * 탭 네비게이션이 포함된 프로젝트 관리 보드 템플릿
+ * 
+ * 레이아웃 컨테이너(SectionContainer, PageContainer)는 페이지 레벨에서 제공됩니다.
+ * 이 컴포넌트는 순수 콘텐츠만 렌더링합니다.
  * 
  * @param {Array} data - Project 데이터 배열 (기본값: mock projectData)
  */
@@ -36,7 +38,7 @@ export const TaskTableBoard = ({ data = projectData }) => {
   const filteredData = getFilteredData();
 
   return (
-    <SectionContainer>
+    <>
       {/* Header */}
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
         <Typography variant="h5" fontWeight={700}>
@@ -54,7 +56,7 @@ export const TaskTableBoard = ({ data = projectData }) => {
           onChange={(_, newValue) => setCurrentTab(newValue)}
           aria-label="project tabs"
         >
-          {tabs.map((tab, index) => (
+          {tabs.map((tab) => (
             <Tab key={tab.value} label={tab.label} />
           ))}
         </Tabs>
@@ -62,6 +64,6 @@ export const TaskTableBoard = ({ data = projectData }) => {
 
       {/* Table */}
       <AdvancedTable data={filteredData} />
-    </SectionContainer>
+    </>
   );
 };

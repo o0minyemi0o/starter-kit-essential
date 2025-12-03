@@ -23,7 +23,6 @@ export default {
  * - 반응형 여백: 모바일(xs) py:4, 데스크탑(md) py:6
  */
 export const Default = {
-  name: '기본',
   render: () => (
     <Box>
       <DocumentTitle
@@ -59,7 +58,6 @@ export const Default = {
  * SectionContainer를 연속으로 배치하여 섹션을 구분합니다.
  */
 export const StackingSections = {
-  name: '여러 섹션 쌓기',
   render: () => (
     <Box sx={{ py: 4 }}>
       <SectionTitle>여러 섹션 쌓기</SectionTitle>
@@ -97,7 +95,6 @@ export const StackingSections = {
  * 기본 상하 여백은 반응형으로 적용됩니다.
  */
 export const ResponsiveSpacing = {
-  name: '반응형 여백',
   render: () => (
     <Box sx={{ py: 4, bgcolor: 'grey.50' }}>
       <SectionTitle>기본 여백 (py)</SectionTitle>
@@ -128,7 +125,6 @@ export const ResponsiveSpacing = {
  * ## Props 문서
  */
 export const Props = {
-  name: 'Props',
   render: () => (
     <Box sx={{ py: 4 }}>
       <SectionTitle>Props</SectionTitle>
@@ -170,7 +166,6 @@ export const Props = {
  * SectionContainer와 PageContainer를 함께 사용하는 일반적인 패턴입니다.
  */
 export const CombinedUsage = {
-  name: 'PageContainer와 조합',
   render: () => (
     <Box>
       <SectionTitle>조합 사용 예시</SectionTitle>

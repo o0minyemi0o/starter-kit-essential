@@ -22,7 +22,6 @@ export default {
  * - 기본값: xl (1536px)
  */
 export const Default = {
-  name: '기본',
   render: () => (
     <Box>
       <DocumentTitle

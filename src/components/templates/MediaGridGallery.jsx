@@ -7,11 +7,13 @@ import Typography from '@mui/material/Typography';
 import { AssetCard } from '../orbit/cards/AssetCard';
 import { SearchBar } from '../orbit/input/SearchBar';
 import { assetData } from '../orbit/data/mock';
-import { SectionContainer } from '../container/SectionContainer';
 
 /**
  * MediaGridGallery
  * 검색 및 필터링이 가능한 미디어 갤러리 템플릿
+ * 
+ * 레이아웃 컨테이너(SectionContainer, PageContainer)는 페이지 레벨에서 제공됩니다.
+ * 이 컴포넌트는 순수 콘텐츠만 렌더링합니다.
  * 
  * @param {Array} data - Asset 데이터 배열 (기본값: mock assetData)
  */
@@ -39,7 +41,7 @@ export const MediaGridGallery = ({ data = assetData }) => {
   });
 
   return (
-    <SectionContainer>
+    <>
       {/* Header: Search & Filter */}
       <Box sx={{ mb: 4 }}>
         <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: 2, justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
@@ -84,6 +86,6 @@ export const MediaGridGallery = ({ data = assetData }) => {
           </Typography>
         </Box>
       )}
-    </SectionContainer>
+    </>
   );
 };

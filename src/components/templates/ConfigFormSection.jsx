@@ -11,11 +11,13 @@ import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
 import { CustomCard } from '../../components/card/CustomCard';
 import { userData } from '../orbit/data/mock';
-import { SectionContainer } from '../container/SectionContainer';
 
 /**
  * ConfigFormSection
  * 사용자 설정 및 프로필 관리 폼 템플릿
+ * 
+ * 레이아웃 컨테이너(SectionContainer, PageContainer)는 페이지 레벨에서 제공됩니다.
+ * 이 컴포넌트는 순수 콘텐츠만 렌더링합니다.
  * 
  * @param {Object} data - User 데이터 (기본값: mock userData)
  */
@@ -52,13 +54,12 @@ export const ConfigFormSection = ({ data = userData }) => {
   };
 
   return (
-    <SectionContainer>
-      <Box sx={{ width: '100%', maxWidth: 800, mx: 'auto' }}>
-        <Typography variant="h5" fontWeight={700} sx={{ mb: 3 }}>
-          Studio Configuration
-        </Typography>
+    <>
+      <Typography variant="h5" fontWeight={700} sx={{ mb: 3 }}>
+        Studio Configuration
+      </Typography>
 
-        <Stack spacing={3}>
+      <Stack spacing={3}>
           {/* 1. Profile Section */}
           <CustomCard layout="vertical" contentPadding="lg">
             <Typography variant="h6" gutterBottom>Profile Settings</Typography>
@@ -137,13 +138,12 @@ export const ConfigFormSection = ({ data = userData }) => {
             </Stack>
           </CustomCard>
 
-          {/* Action Buttons */}
-          <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2 }}>
-            <Button variant="text" color="inherit">Cancel</Button>
-            <Button variant="contained" onClick={handleSave}>Save Changes</Button>
-          </Box>
-        </Stack>
-      </Box>
-    </SectionContainer>
+        {/* Action Buttons */}
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2 }}>
+          <Button variant="text" color="inherit">Cancel</Button>
+          <Button variant="contained" onClick={handleSave}>Save Changes</Button>
+        </Box>
+      </Stack>
+    </>
   );
 };
