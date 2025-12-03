@@ -6,7 +6,6 @@ import { defaultTheme as theme } from './styles/themes';
 import MainLayout from './layouts/MainLayout';
 import DashboardPage from './pages/DashboardPage';
 import LibraryPage from './pages/LibraryPage';
-import ManagerPage from './pages/ManagerPage';
 import SettingsPage from './pages/SettingsPage';
 
 function App() {
@@ -17,8 +16,7 @@ function App() {
         <Routes>
           <Route element={<MainLayout />}>
             <Route index element={<DashboardPage />} />
-            <Route path="library" element={<LibraryPage />} />
-            <Route path="manager" element={<ManagerPage />} />
+            <Route path="moodboards" element={<LibraryPage />} />
             <Route path="settings" element={<SettingsPage />} />
           </Route>
         </Routes>

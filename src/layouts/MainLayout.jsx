@@ -28,10 +28,9 @@ import { NavMenu } from '../components/navigation/NavMenu';
  * 각 아이템에 id, label, icon, path를 정의
  */
 const navItems = [
-  { id: 'dashboard', label: 'Team Pulse', icon: <DashboardIcon />, path: '/' },
-  { id: 'library', label: 'Asset Library', icon: <PhotoLibraryIcon />, path: '/library' },
-  { id: 'manager', label: 'Campaign Manager', icon: <CampaignIcon />, path: '/manager' },
-  { id: 'settings', label: 'Studio Config', icon: <SettingsIcon />, path: '/settings' },
+  { id: 'archive', label: 'Archive', icon: <DashboardIcon />, path: '/' },
+  { id: 'moodboards', label: 'Moodboards', icon: <PhotoLibraryIcon />, path: '/moodboards' },
+  { id: 'settings', label: 'Settings', icon: <SettingsIcon />, path: '/settings' },
 ];
 
 /**
@@ -39,7 +38,7 @@ const navItems = [
  */
 const getActiveId = (pathname) => {
   const item = navItems.find((item) => item.path === pathname);
-  return item?.id || 'dashboard';
+  return item?.id || 'archive';
 };
 
 function MainLayout() {
@@ -66,7 +65,7 @@ function MainLayout() {
           }}
           onClick={() => navigate('/')}
         >
-          Orbit.
+          MUSE.
         </Typography>
       }
       headerCollapsible={
