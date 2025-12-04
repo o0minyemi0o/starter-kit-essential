@@ -42,20 +42,6 @@ export function StyledParagraph({
   // 최대 너비 처리
   const maxWidthValue = typeof maxWidth === 'number' ? `${maxWidth}ch` : maxWidth;
 
-  // variant별 lineHeight 값 (MUI 기본값 기준)
-  const variantLineHeights = {
-    h4: 1.235,
-    h5: 1.334,
-    h6: 1.6,
-    body1: 1.5,
-    body2: 1.43,
-  };
-
-  const currentLineHeight = variantLineHeights[variant] || 1.5;
-
-  // Drop Cap 크기: lineHeight 기반으로 정확히 2줄 높이 계산
-  const dropCapFontSize = `${currentLineHeight * 2}em`;
-
   // 장식 스타일 (왼쪽 border)
   const decorationStyle = {
     pl: 4,

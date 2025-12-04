@@ -10,7 +10,7 @@ import { ImageCard } from '../../components/card/ImageCard';
 import { museAssets } from '../../data/museMockData';
 
 export default {
-  title: 'Templates/MUSE',
+  title: 'Template/MUSE',
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',
