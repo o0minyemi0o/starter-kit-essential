@@ -15,7 +15,7 @@ import TextField from '@mui/material/TextField';
 import Fade from '@mui/material/Fade';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import Masonry from '@mui/lab/Masonry';
+import Grid from '@mui/material/Grid';
 import AddIcon from '@mui/icons-material/Add';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ShareIcon from '@mui/icons-material/Share';
@@ -338,16 +338,12 @@ export function MoodboardsPage() {
             </Box>
           </Box>
 
-          {/* 보드 아이템 Masonry 그리드 */}
+          {/* 보드 아이템 Grid */}
           {currentBoard.items.length > 0 ? (
-            <Masonry
-              columns={{ xs: 1, sm: 2, md: 3, lg: 4 }}
-              spacing={2}
-              sx={{ margin: 0 }}
-            >
+            <Grid container spacing={2}>
               {currentBoard.items.map((item, index) => (
-                <Fade key={`${currentBoard.id}-${item.id}`} in timeout={300 + index * 50}>
-                  <Box sx={{ position: 'relative' }}>
+                <Grid key={`${currentBoard.id}-${item.id}`} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+                  <Fade in timeout={300 + index * 50}>
                     <Box
                       onClick={() => handleCardClick(item, index)}
                       sx={{ cursor: 'pointer' }}
@@ -356,59 +352,60 @@ export function MoodboardsPage() {
                         src={item.thumbnail}
                         title={item.title}
                         tags={item.tags}
-                        onLike={(e) => {
-                          e?.stopPropagation?.();
-                          handleLike(item.id);
-                        }}
-                        onAddToBoard={(e) => {
-                          e?.stopPropagation?.();
+                        hideActions
+                        customOverlay={
+                          <Box
+                            className="moodboard-item-overlay"
+                            sx={{
+                              position: 'absolute',
+                              inset: 0,
+                              display: 'flex',
+                              justifyContent: 'space-between',
+                              alignItems: 'flex-start',
+                              p: 1,
+                              opacity: 0,
+                              transition: 'opacity 0.2s',
+                            }}
+                          >
+                            {/* 드래그 핸들 (좌측 상단) */}
+                            <IconButton
+                              size="small"
+                              sx={{
+                                bgcolor: 'rgba(255,255,255,0.9)',
+                                cursor: 'grab',
+                                '&:hover': { bgcolor: 'white' },
+                              }}
+                            >
+                              <DragIndicatorIcon fontSize="small" />
+                            </IconButton>
+                            {/* 제거 버튼 (우측 상단) */}
+                            <IconButton
+                              size="small"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleRemoveItem(item.id);
+                              }}
+                              sx={{
+                                bgcolor: 'error.main',
+                                color: 'white',
+                                '&:hover': { bgcolor: 'error.dark' },
+                              }}
+                            >
+                              <CloseIcon fontSize="small" />
+                            </IconButton>
+                          </Box>
+                        }
+                        sx={{
+                          '&:hover .moodboard-item-overlay': {
+                            opacity: 1,
+                          },
                         }}
                       />
                     </Box>
-                    {/* 제거 버튼 */}
-                    <IconButton
-                      size="small"
-                      onClick={() => handleRemoveItem(item.id)}
-                      sx={{
-                        position: 'absolute',
-                        top: 8,
-                        right: 8,
-                        bgcolor: 'error.main',
-                        color: 'white',
-                        opacity: 0,
-                        transition: 'opacity 0.2s',
-                        '.MuiBox-root:hover &': {
-                          opacity: 1,
-                        },
-                        '&:hover': {
-                          bgcolor: 'error.dark',
-                        },
-                      }}
-                    >
-                      <CloseIcon fontSize="small" />
-                    </IconButton>
-                    {/* 드래그 핸들 (더미) */}
-                    <IconButton
-                      size="small"
-                      sx={{
-                        position: 'absolute',
-                        top: 8,
-                        left: 8,
-                        bgcolor: 'rgba(255,255,255,0.9)',
-                        opacity: 0,
-                        transition: 'opacity 0.2s',
-                        cursor: 'grab',
-                        '.MuiBox-root:hover &': {
-                          opacity: 1,
-                        },
-                      }}
-                    >
-                      <DragIndicatorIcon fontSize="small" />
-                    </IconButton>
-                  </Box>
-                </Fade>
+                  </Fade>
+                </Grid>
               ))}
-            </Masonry>
+            </Grid>
           ) : (
             <Box
               sx={{
@@ -489,28 +486,26 @@ export function MoodboardsPage() {
 
           {/* 무드보드 그리드 */}
           {moodboards.length > 0 ? (
-            <Masonry
-              columns={{ xs: 1, sm: 2, md: 3, lg: 4 }}
-              spacing={2}
-              sx={{ margin: 0 }}
-            >
+            <Grid container spacing={2}>
               {moodboards.map((board, index) => (
-                <Fade key={board.id} in timeout={300 + index * 50}>
-                  <Box>
-                    <MoodboardCard
-                      id={board.id}
-                      name={board.name}
-                      description={board.description}
-                      items={board.items}
-                      createdAt={board.createdAt}
-                      onClick={() => handleBoardClick(board.id)}
-                      onEdit={handleEditBoard}
-                      onDelete={handleDeleteBoardFromCard}
-                    />
-                  </Box>
-                </Fade>
+                <Grid key={board.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+                  <Fade in timeout={300 + index * 50}>
+                    <Box>
+                      <MoodboardCard
+                        id={board.id}
+                        name={board.name}
+                        description={board.description}
+                        items={board.items}
+                        createdAt={board.createdAt}
+                        onClick={() => handleBoardClick(board.id)}
+                        onEdit={handleEditBoard}
+                        onDelete={handleDeleteBoardFromCard}
+                      />
+                    </Box>
+                  </Fade>
+                </Grid>
               ))}
-            </Masonry>
+            </Grid>
           ) : (
             <Box
               sx={{

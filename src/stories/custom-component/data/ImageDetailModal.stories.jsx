@@ -6,7 +6,7 @@ import { ImageDetailModal } from '../../../components/data/ImageDetailModal';
 import { museAssets } from '../../../data/museMockData';
 
 export default {
-  title: 'Custom Component/Data/ImageDetailModal',
+  title: 'Custom Component/Overlay/ImageDetailModal',
   tags: ['autodocs'],
   parameters: {
     layout: 'padded',

@@ -1,5 +1,6 @@
 import { forwardRef } from 'react';
 import Box from '@mui/material/Box';
+import { CardContainer } from './CardContainer';
 
 /**
  * CustomCard 컴포넌트
@@ -170,28 +171,6 @@ const CustomCard = forwardRef(function CustomCard({
   };
 
   /**
-   * 인터랙티브 스타일
-   */
-  const getInteractiveStyles = () => {
-    if (!isInteractive && !onClick) return {};
-
-    return {
-      cursor: 'pointer',
-      transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
-      '&:hover': {
-        transform: 'translateY(-4px)',
-        boxShadow: '0 12px 32px rgba(0,0,0,0.12)',
-        '& .custom-card-media img': {
-          transform: 'scale(1.05)',
-        },
-      },
-      '&:active': {
-        transform: 'translateY(-2px)',
-      },
-    };
-  };
-
-  /**
    * 미디어 렌더링
    * - mediaSlot: 커스텀 미디어 요소 (우선)
    * - mediaSrc: 이미지 URL
@@ -239,17 +218,15 @@ const CustomCard = forwardRef(function CustomCard({
   };
 
   return (
-    <Box
+    <CardContainer
       ref={ref}
+      variant="outlined"
+      padding="none"
+      radius="md"
       onClick={onClick}
+      isInteractive={isInteractive}
       sx={{
-        overflow: 'hidden',
-        borderRadius: 2,
-        backgroundColor: 'background.paper',
-        border: '1px solid',
-        borderColor: 'divider',
         ...getLayoutStyles(),
-        ...getInteractiveStyles(),
         ...sx,
       }}
       {...props}
@@ -260,7 +237,7 @@ const CustomCard = forwardRef(function CustomCard({
           {children}
         </Box>
       )}
-    </Box>
+    </CardContainer>
   );
 });
 

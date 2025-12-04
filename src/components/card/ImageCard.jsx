@@ -23,6 +23,8 @@ import { CustomCard } from './CustomCard';
  * @param {string[]} tags - 관련 태그 목록 [Optional]
  * @param {function} onLike - 좋아요 버튼 클릭 핸들러 [Optional]
  * @param {function} onAddToBoard - 무드보드 추가 버튼 클릭 핸들러 [Optional]
+ * @param {boolean} hideActions - 기본 액션 버튼 숨김 여부 [Optional, 기본값: false]
+ * @param {node} customOverlay - 커스텀 오버레이 요소 (hideActions와 함께 사용) [Optional]
  * @param {object} sx - 추가 스타일 [Optional]
  *
  * Example usage:
@@ -33,6 +35,13 @@ import { CustomCard } from './CustomCard';
  *   onLike={() => handleLike()}
  *   onAddToBoard={() => handleAdd()}
  * />
+ *
+ * // 커스텀 오버레이 사용 (MoodboardsPage 등)
+ * <ImageCard
+ *   src="/image.jpg"
+ *   hideActions
+ *   customOverlay={<MyCustomButtons />}
+ * />
  */
 export function ImageCard({
   src,
@@ -40,6 +49,8 @@ export function ImageCard({
   tags = [],
   onLike,
   onAddToBoard,
+  hideActions = false,
+  customOverlay,
   sx,
   ...props
 }) {
@@ -93,10 +104,7 @@ export function ImageCard({
     </Box>
   );
 
-  /**
-   * 카드 콘텐츠 (제목 + 태그)
-   * - title 또는 tags가 있을 때만 렌더링
-   */
+  // 제목이나 태그가 있는지 확인
   const hasContent = title || tags.length > 0;
 
   return (
@@ -106,7 +114,7 @@ export function ImageCard({
       mediaAlt={title || 'Image asset'}
       mediaRatio="auto"
       contentPadding={hasContent ? 'sm' : 'none'}
-      overlaySlot={ActionButtons}
+      overlaySlot={hideActions ? customOverlay : ActionButtons}
       sx={{
         cursor: 'pointer',
         transition: 'transform 0.2s',
@@ -124,6 +132,7 @@ export function ImageCard({
     >
       {hasContent && (
         <>
+          {/* 제목 */}
           {title && (
             <Typography
               variant="body2"
@@ -132,14 +141,21 @@ export function ImageCard({
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
                 whiteSpace: 'nowrap',
-                mb: tags.length > 0 ? 1 : 0,
               }}
             >
               {title}
             </Typography>
           )}
+          {/* 태그 */}
           {tags.length > 0 && (
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+            <Box
+              sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: 0.5,
+                mt: title ? 0.5 : 0,
+              }}
+            >
               {tags.slice(0, 3).map((tag) => (
                 <Chip
                   key={tag}
