@@ -3,6 +3,31 @@ import { Box, Typography } from '@mui/material';
 import { keyframes } from '@mui/material/styles';
 
 /**
+ * Material Symbols 아이콘 컴포넌트
+ * 프로젝트 디자인 시스템의 Icons.stories.jsx 패턴 사용
+ */
+function MaterialSymbol({ name, size = 24, fill = false, weight = 400, color = 'inherit', sx = {} }) {
+  return (
+    <Box
+      component="span"
+      className="material-symbols-rounded"
+      sx={{
+        fontSize: size,
+        color,
+        fontVariationSettings: `'FILL' ${fill ? 1 : 0}, 'wght' ${weight}`,
+        lineHeight: 1,
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        ...sx,
+      }}
+    >
+      {name}
+    </Box>
+  );
+}
+
+/**
  * 애니메이션 키프레임 정의
  */
 const fadeInScale = keyframes`
@@ -30,10 +55,8 @@ const fadeInScale = keyframes`
  *
  * Props:
  * @param {string} children - 인용할 텍스트 [Required]
- * @param {string} quoteStyle - 인용 부호 스타일 ('curly' | 'straight' | 'guillemet' | 'angle' | 'custom') [Optional, 기본값: 'curly']
- * @param {string} customQuote - quoteStyle이 'custom'일 때 사용할 커스텀 인용 부호 [Optional]
  * @param {string} quoteSize - 인용 부호 크기 ('sm' | 'md' | 'lg' | 'xl') [Optional, 기본값: 'lg']
- * @param {string} quoteColor - 인용 부호 색상 [Optional, 기본값: 'primary.main']
+ * @param {string} quoteColor - 인용 부호 색상 [Optional, 기본값: 'text.disabled']
  * @param {string} position - 인용 부호 위치 ('outside' | 'inside' | 'overlay') [Optional, 기본값: 'outside']
  * @param {boolean} animated - 등장 애니메이션 [Optional, 기본값: false]
  * @param {string} author - 인용 출처/저자 [Optional]
@@ -43,16 +66,14 @@ const fadeInScale = keyframes`
  *
  * Example usage:
  * <QuotedContainer>Design is how it works.</QuotedContainer>
- * <QuotedContainer quoteStyle="guillemet" author="Steve Jobs">
+ * <QuotedContainer author="Steve Jobs">
  *   Design is not just what it looks like.
  * </QuotedContainer>
  */
 export function QuotedContainer({
   children,
-  quoteStyle = 'curly',
-  customQuote,
   quoteSize = 'lg',
-  quoteColor = 'primary.main',
+  quoteColor = 'text.disabled',
   position = 'outside',
   animated = false,
   author,
@@ -86,128 +107,101 @@ export function QuotedContainer({
     return () => observer.disconnect();
   }, [animated]);
 
-  // 인용 부호 스타일 매핑
-  const quoteCharacters = {
-    curly: { open: '"', close: '"' },
-    straight: { open: '"', close: '"' },
-    guillemet: { open: '«', close: '»' },
-    angle: { open: '「', close: '」' },
-    custom: { open: customQuote || '"', close: customQuote || '"' },
+  // 아이콘 크기 매핑 (px)
+  const iconSizes = {
+    sm: 20,
+    md: 28,
+    lg: 36,
+    xl: 48,
   };
 
-  // 인용 부호 크기 매핑
-  const quoteSizes = {
-    sm: { fontSize: '3rem', offset: '1rem' },
-    md: { fontSize: '4rem', offset: '1.5rem' },
-    lg: { fontSize: '6rem', offset: '2rem' },
-    xl: { fontSize: '8rem', offset: '2.5rem' },
+  const iconSize = iconSizes[quoteSize];
+
+  // 공통 아이콘 스타일
+  const baseIconSx = {
+    opacity: animated && !isVisible ? 0 : (position === 'overlay' ? 0.12 : 0.3),
+    animation: animated && isVisible ? `${fadeInScale} 0.4s ease-out forwards` : 'none',
+    flexShrink: 0,
   };
 
-  const { open: openQuote, close: closeQuote } = quoteCharacters[quoteStyle];
-  const { fontSize: quoteFontSize, offset: quoteOffset } = quoteSizes[quoteSize];
-
-  // 정렬 매핑
-  const alignmentMap = {
-    left: 'flex-start',
-    center: 'center',
-    right: 'flex-end',
-  };
-
-  // 공통 인용 부호 스타일
-  const quoteBaseStyle = {
-    fontFamily: 'Georgia, "Times New Roman", serif',
-    fontSize: quoteFontSize,
-    fontWeight: 400,
-    lineHeight: 0.8,
-    color: quoteColor,
-    opacity: animated && !isVisible ? 0 : (position === 'overlay' ? 0.15 : 1),
-    animation: animated && isVisible ? `${fadeInScale} 0.5s ease-out forwards` : 'none',
-    userSelect: 'none',
-  };
-
-  // Position: outside (기본 - 텍스트 외부에 배치)
+  // Position: outside (기본 - 인라인 배치로 첫 글자 좌상단, 마지막 글자 우하단)
   if (position === 'outside') {
     return (
       <Box
         ref={containerRef}
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: alignmentMap[align],
+          textAlign: align,
           ...sx,
         }}
         {...props}
       >
-        <Box
+        <Typography
+          variant={variant}
+          component="blockquote"
           sx={{
-            display: 'flex',
-            alignItems: 'flex-start',
-            gap: 2,
+            fontWeight: 300,
+            fontStyle: 'italic',
+            lineHeight: 1.6,
+            textAlign: align,
+            m: 0,
+            position: 'relative',
           }}
         >
-          <Box
-            component="span"
-            aria-hidden="true"
+          {/* 여는 따옴표 - 첫 글자 좌상단 */}
+          <MaterialSymbol
+            name="format_quote"
+            size={iconSize}
+            fill
+            color={quoteColor}
             sx={{
-              ...quoteBaseStyle,
-              mt: `-${quoteOffset}`,
-              flexShrink: 0,
+              ...baseIconSx,
+              transform: 'scaleX(-1) translateY(-0.15em)',
+              verticalAlign: 'top',
+              mr: '0.1em',
+              ml: '-0.1em',
+            }}
+          />
+          {children}
+          {/* 닫는 따옴표 - 마지막 글자 우하단 */}
+          <MaterialSymbol
+            name="format_quote"
+            size={iconSize}
+            fill
+            color={quoteColor}
+            sx={{
+              ...baseIconSx,
+              transform: 'translateY(0.15em)',
+              verticalAlign: 'bottom',
+              ml: '0.1em',
+              mr: '-0.1em',
+              animationDelay: '0.15s',
+            }}
+          />
+        </Typography>
+
+        {author && (
+          <Typography
+            variant="body2"
+            component="cite"
+            sx={{
+              display: 'block',
+              mt: 2,
+              fontStyle: 'normal',
+              color: 'text.secondary',
+              textAlign: align,
+              '&::before': {
+                content: '"— "',
+              },
             }}
           >
-            {openQuote}
-          </Box>
-          <Box sx={{ flex: 1 }}>
-            <Typography
-              variant={variant}
-              component="blockquote"
-              sx={{
-                fontWeight: 300,
-                fontStyle: 'italic',
-                lineHeight: 1.5,
-                textAlign: align,
-                m: 0,
-              }}
-            >
-              {children}
-            </Typography>
-            {author && (
-              <Typography
-                variant="body2"
-                component="cite"
-                sx={{
-                  display: 'block',
-                  mt: 2,
-                  fontStyle: 'normal',
-                  color: 'text.secondary',
-                  textAlign: align,
-                  '&::before': {
-                    content: '"— "',
-                  },
-                }}
-              >
-                {author}
-              </Typography>
-            )}
-          </Box>
-          <Box
-            component="span"
-            aria-hidden="true"
-            sx={{
-              ...quoteBaseStyle,
-              alignSelf: 'flex-end',
-              mb: `-${quoteOffset}`,
-              flexShrink: 0,
-              animationDelay: '0.2s',
-            }}
-          >
-            {closeQuote}
-          </Box>
-        </Box>
+            {author}
+          </Typography>
+        )}
       </Box>
     );
   }
 
-  // Position: inside (텍스트와 함께 인라인 배치)
+  // Position: inside (더 작은 아이콘, 텍스트와 밀착)
   if (position === 'inside') {
     return (
       <Box
@@ -224,36 +218,38 @@ export function QuotedContainer({
           sx={{
             fontWeight: 300,
             fontStyle: 'italic',
-            lineHeight: 1.5,
+            lineHeight: 1.6,
             m: 0,
-            display: 'inline',
           }}
         >
-          <Box
-            component="span"
-            aria-hidden="true"
+          {/* 여는 따옴표 - 첫 글자 좌상단 */}
+          <MaterialSymbol
+            name="format_quote"
+            size="0.8em"
+            fill
+            color={quoteColor}
             sx={{
-              ...quoteBaseStyle,
-              fontSize: '1.5em',
-              verticalAlign: 'text-top',
-              mr: '0.1em',
+              ...baseIconSx,
+              transform: 'scaleX(-1) translateY(-0.2em)',
+              verticalAlign: 'top',
+              mr: '0.05em',
             }}
-          >
-            {openQuote}
-          </Box>
+          />
           {children}
-          <Box
-            component="span"
-            aria-hidden="true"
+          {/* 닫는 따옴표 - 마지막 글자 우하단 */}
+          <MaterialSymbol
+            name="format_quote"
+            size="0.8em"
+            fill
+            color={quoteColor}
             sx={{
-              ...quoteBaseStyle,
-              fontSize: '1.5em',
-              verticalAlign: 'text-bottom',
-              ml: '0.1em',
+              ...baseIconSx,
+              transform: 'translateY(0.2em)',
+              verticalAlign: 'bottom',
+              ml: '0.05em',
+              animationDelay: '0.15s',
             }}
-          >
-            {closeQuote}
-          </Box>
+          />
         </Typography>
         {author && (
           <Typography
@@ -276,7 +272,7 @@ export function QuotedContainer({
     );
   }
 
-  // Position: overlay (인용 부호가 텍스트 뒤에 오버레이)
+  // Position: overlay (큰 fill 아이콘이 텍스트 뒤에 배경으로)
   if (position === 'overlay') {
     return (
       <Box
@@ -284,28 +280,29 @@ export function QuotedContainer({
         sx={{
           position: 'relative',
           textAlign: align,
-          py: 4,
+          py: 3,
           ...sx,
         }}
         {...props}
       >
-        {/* 배경 인용 부호 */}
-        <Box
-          component="span"
-          aria-hidden="true"
+        {/* 배경 인용 부호 아이콘 */}
+        <MaterialSymbol
+          name="format_quote"
+          size={iconSize * 4}
+          fill
+          color={quoteColor}
           sx={{
             position: 'absolute',
             left: align === 'right' ? 'auto' : 0,
             right: align === 'right' ? 0 : 'auto',
             top: 0,
-            ...quoteBaseStyle,
-            fontSize: `calc(${quoteFontSize} * 2)`,
+            transform: 'scaleX(-1)',
+            opacity: animated && !isVisible ? 0 : 0.06,
+            animation: animated && isVisible ? `${fadeInScale} 0.4s ease-out forwards` : 'none',
             pointerEvents: 'none',
             zIndex: 0,
           }}
-        >
-          {openQuote}
-        </Box>
+        />
 
         {/* 텍스트 */}
         <Box sx={{ position: 'relative', zIndex: 1 }}>
@@ -315,7 +312,7 @@ export function QuotedContainer({
             sx={{
               fontWeight: 300,
               fontStyle: 'italic',
-              lineHeight: 1.5,
+              lineHeight: 1.6,
               m: 0,
             }}
           >

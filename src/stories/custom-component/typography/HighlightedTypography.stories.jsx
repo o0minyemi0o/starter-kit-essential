@@ -33,92 +33,80 @@ export default {
   },
   argTypes: {
     variant: {
-      control: 'select',
+      control: { type: 'select' },
       options: ['body1', 'body2', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
-      description: '타이포그래피 variant',
-      table: {
-        type: { summary: 'string' },
-        defaultValue: { summary: 'body1' },
-      },
+    },
+    component: {
+      control: { type: 'text' },
     },
     animated: {
-      control: 'boolean',
-      description: 'viewport 진입 시 애니메이션 활성화',
-      table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-      },
+      control: { type: 'boolean' },
     },
     threshold: {
-      control: { type: 'range', min: 0, max: 1, step: 0.1 },
-      description: 'Intersection Observer threshold',
-      table: {
-        type: { summary: 'number' },
-        defaultValue: { summary: '0.5' },
-      },
+      control: { type: 'number', min: 0, max: 1, step: 0.1 },
     },
   },
 };
 
-/** 기본 사용 - Controls 패널에서 variant, animated 조절 가능 */
+/** 기본 사용 - HighlightedTypography props 조절 */
 export const Default = {
   args: {
     variant: 'h4',
+    component: 'p',
     animated: false,
     threshold: 0.5,
   },
   render: (args) => (
-    <HighlightedTypography {...args}>
+    <HighlightedTypography
+      variant={args.variant}
+      component={args.component}
+      animated={args.animated}
+      threshold={args.threshold}
+    >
       This is a <Highlight type="background">highlighted</Highlight> text example.
     </HighlightedTypography>
   ),
 };
 
-/** Highlight 타입별 인터랙티브 데모 */
+/** Highlight 컴포넌트 props 조절 */
 export const HighlightPlayground = {
   args: {
-    highlightType: 'background',
-    highlightColor: 'primary.main',
+    type: 'background',
+    color: 'primary.main',
     textColor: 'auto',
     animated: false,
     delay: 0,
     duration: 600,
   },
   argTypes: {
-    highlightType: {
-      control: 'select',
+    type: {
+      control: { type: 'select' },
       options: ['underline', 'background', 'marker', 'circle'],
-      description: '강조 유형',
     },
-    highlightColor: {
-      control: 'select',
+    color: {
+      control: { type: 'select' },
       options: ['primary.main', 'secondary.main', 'error.main', 'warning.main', 'success.main', '#FF0000', '#00FF00', '#0000FF', '#000000', '#FFFF00'],
-      description: '강조 색상',
     },
     textColor: {
-      control: 'select',
-      options: ['auto', 'white', 'inherit', 'primary.main'],
-      description: '텍스트 색상 (background 타입에서 유효)',
+      control: { type: 'select' },
+      options: ['auto', '#FFFFFF', 'inherit'],
     },
     animated: {
-      control: 'boolean',
-      description: 'draw 애니메이션 활성화',
+      control: { type: 'boolean' },
     },
     delay: {
       control: { type: 'number', min: 0, max: 2000, step: 100 },
-      description: '애니메이션 지연 (ms)',
     },
     duration: {
       control: { type: 'number', min: 100, max: 2000, step: 100 },
-      description: '애니메이션 지속 시간 (ms)',
     },
   },
   render: (args) => (
     <HighlightedTypography variant="h4" animated={args.animated}>
       This text has a{' '}
       <Highlight
-        type={args.highlightType}
-        color={args.highlightColor}
+        type={args.type}
+        color={args.color}
         textColor={args.textColor}
         animated={args.animated}
         delay={args.delay}

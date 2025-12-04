@@ -32,27 +32,40 @@ export default {
     },
   },
   argTypes: {
-    quoteStyle: {
-      control: 'select',
-      options: ['curly', 'straight', 'guillemet', 'angle', 'custom'],
-      description: '인용 부호 스타일',
+    children: {
+      control: { type: 'text' },
+      description: '인용할 텍스트',
     },
     quoteSize: {
-      control: 'select',
+      control: { type: 'select' },
       options: ['sm', 'md', 'lg', 'xl'],
       description: '인용 부호 크기',
     },
+    quoteColor: {
+      control: { type: 'select' },
+      options: ['text.disabled', 'text.secondary', 'primary.main', 'secondary.main', '#000000', '#666666'],
+      description: '인용 부호 색상',
+    },
     position: {
-      control: 'select',
+      control: { type: 'select' },
       options: ['outside', 'inside', 'overlay'],
       description: '인용 부호 위치',
     },
     animated: {
-      control: 'boolean',
+      control: { type: 'boolean' },
       description: '등장 애니메이션',
     },
+    author: {
+      control: { type: 'text' },
+      description: '인용 출처/저자',
+    },
+    variant: {
+      control: { type: 'select' },
+      options: ['h3', 'h4', 'h5', 'h6', 'body1', 'body2'],
+      description: '타이포그래피 variant',
+    },
     align: {
-      control: 'select',
+      control: { type: 'select' },
       options: ['left', 'center', 'right'],
       description: '텍스트 정렬',
     },
@@ -70,11 +83,13 @@ const sampleQuotes = {
 export const Default = {
   args: {
     children: sampleQuotes.short,
-    quoteStyle: 'curly',
     quoteSize: 'lg',
+    quoteColor: 'text.disabled',
     position: 'outside',
     animated: false,
     author: 'Steve Jobs',
+    variant: 'h4',
+    align: 'left',
   },
 };
 
@@ -112,10 +127,10 @@ export const Documentation = {
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableCell sx={ { fontFamily: 'monospace' } }>quoteStyle</TableCell>
-                <TableCell>&apos;curly&apos; | &apos;straight&apos; | &apos;guillemet&apos; | &apos;angle&apos; | &apos;custom&apos;</TableCell>
-                <TableCell>&apos;curly&apos;</TableCell>
-                <TableCell>인용 부호 스타일</TableCell>
+                <TableCell sx={ { fontFamily: 'monospace' } }>children</TableCell>
+                <TableCell>string</TableCell>
+                <TableCell>-</TableCell>
+                <TableCell>인용할 텍스트 (필수)</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell sx={ { fontFamily: 'monospace' } }>quoteSize</TableCell>
@@ -124,16 +139,16 @@ export const Documentation = {
                 <TableCell>인용 부호 크기</TableCell>
               </TableRow>
               <TableRow>
+                <TableCell sx={ { fontFamily: 'monospace' } }>quoteColor</TableCell>
+                <TableCell>string</TableCell>
+                <TableCell>&apos;text.disabled&apos;</TableCell>
+                <TableCell>인용 부호 색상</TableCell>
+              </TableRow>
+              <TableRow>
                 <TableCell sx={ { fontFamily: 'monospace' } }>position</TableCell>
                 <TableCell>&apos;outside&apos; | &apos;inside&apos; | &apos;overlay&apos;</TableCell>
                 <TableCell>&apos;outside&apos;</TableCell>
                 <TableCell>인용 부호 위치</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell sx={ { fontFamily: 'monospace' } }>quoteColor</TableCell>
-                <TableCell>string</TableCell>
-                <TableCell>&apos;primary.main&apos;</TableCell>
-                <TableCell>인용 부호 색상</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell sx={ { fontFamily: 'monospace' } }>animated</TableCell>
@@ -147,54 +162,55 @@ export const Documentation = {
                 <TableCell>-</TableCell>
                 <TableCell>인용 출처/저자</TableCell>
               </TableRow>
+              <TableRow>
+                <TableCell sx={ { fontFamily: 'monospace' } }>variant</TableCell>
+                <TableCell>string</TableCell>
+                <TableCell>&apos;h4&apos;</TableCell>
+                <TableCell>타이포그래피 variant</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell sx={ { fontFamily: 'monospace' } }>align</TableCell>
+                <TableCell>&apos;left&apos; | &apos;center&apos; | &apos;right&apos;</TableCell>
+                <TableCell>&apos;left&apos;</TableCell>
+                <TableCell>텍스트 정렬</TableCell>
+              </TableRow>
             </TableBody>
           </Table>
         </TableContainer>
 
-        <SectionTitle title="Quote Styles" description="다섯 가지 인용 부호 스타일을 제공합니다." />
-        <Stack spacing={ 5 }>
-          <Box>
-            <Typography variant="subtitle2" sx={ { mb: 1, color: 'text.secondary' } }>
-              Curly (기본) - " "
+        <SectionTitle title="Quote Size" description="네 가지 인용 부호 크기입니다." />
+        <Stack spacing={ 4 }>
+          <Box sx={ { p: 4, border: '1px solid', borderColor: 'divider' } }>
+            <Typography variant="caption" sx={ { mb: 2, display: 'block', color: 'text.secondary' } }>
+              Small (sm)
             </Typography>
-            <Box sx={ { p: 4, border: '1px solid', borderColor: 'divider' } }>
-              <QuotedContainer quoteStyle="curly" author="Steve Jobs">
-                { sampleQuotes.short }
-              </QuotedContainer>
-            </Box>
+            <QuotedContainer quoteSize="sm" author="Steve Jobs">
+              { sampleQuotes.short }
+            </QuotedContainer>
           </Box>
-
-          <Box>
-            <Typography variant="subtitle2" sx={ { mb: 1, color: 'text.secondary' } }>
-              Straight - &quot; &quot;
+          <Box sx={ { p: 4, border: '1px solid', borderColor: 'divider' } }>
+            <Typography variant="caption" sx={ { mb: 2, display: 'block', color: 'text.secondary' } }>
+              Medium (md)
             </Typography>
-            <Box sx={ { p: 4, border: '1px solid', borderColor: 'divider' } }>
-              <QuotedContainer quoteStyle="straight" author="Unknown">
-                { sampleQuotes.short }
-              </QuotedContainer>
-            </Box>
+            <QuotedContainer quoteSize="md" author="Steve Jobs">
+              { sampleQuotes.short }
+            </QuotedContainer>
           </Box>
-
-          <Box>
-            <Typography variant="subtitle2" sx={ { mb: 1, color: 'text.secondary' } }>
-              Guillemet - « »
+          <Box sx={ { p: 4, border: '1px solid', borderColor: 'divider' } }>
+            <Typography variant="caption" sx={ { mb: 2, display: 'block', color: 'text.secondary' } }>
+              Large (lg) - Default
             </Typography>
-            <Box sx={ { p: 4, border: '1px solid', borderColor: 'divider' } }>
-              <QuotedContainer quoteStyle="guillemet" author="Dieter Rams">
-                { sampleQuotes.medium }
-              </QuotedContainer>
-            </Box>
+            <QuotedContainer quoteSize="lg" author="Steve Jobs">
+              { sampleQuotes.short }
+            </QuotedContainer>
           </Box>
-
-          <Box>
-            <Typography variant="subtitle2" sx={ { mb: 1, color: 'text.secondary' } }>
-              Angle (CJK style) - 「 」
+          <Box sx={ { p: 4, border: '1px solid', borderColor: 'divider' } }>
+            <Typography variant="caption" sx={ { mb: 2, display: 'block', color: 'text.secondary' } }>
+              Extra Large (xl)
             </Typography>
-            <Box sx={ { p: 4, border: '1px solid', borderColor: 'divider' } }>
-              <QuotedContainer quoteStyle="angle">
-                { sampleQuotes.korean }
-              </QuotedContainer>
-            </Box>
+            <QuotedContainer quoteSize="xl" author="Steve Jobs">
+              { sampleQuotes.short }
+            </QuotedContainer>
           </Box>
         </Stack>
 
@@ -202,7 +218,7 @@ export const Documentation = {
         <Stack spacing={ 5 }>
           <Box>
             <Typography variant="subtitle2" sx={ { mb: 1, color: 'text.secondary' } }>
-              Outside (기본) - 텍스트 외부에 배치
+              Outside (기본) - 첫 글자 좌상단, 마지막 글자 우하단
             </Typography>
             <Box sx={ { p: 4, border: '1px solid', borderColor: 'divider' } }>
               <QuotedContainer position="outside" author="Steve Jobs">
@@ -213,7 +229,7 @@ export const Documentation = {
 
           <Box>
             <Typography variant="subtitle2" sx={ { mb: 1, color: 'text.secondary' } }>
-              Inside - 텍스트와 함께 인라인
+              Inside - 더 작은 아이콘, 텍스트에 밀착
             </Typography>
             <Box sx={ { p: 4, border: '1px solid', borderColor: 'divider' } }>
               <QuotedContainer position="inside" author="Steve Jobs">
@@ -224,7 +240,7 @@ export const Documentation = {
 
           <Box>
             <Typography variant="subtitle2" sx={ { mb: 1, color: 'text.secondary' } }>
-              Overlay - 텍스트 뒤에 오버레이
+              Overlay - 텍스트 뒤에 배경 장식
             </Typography>
             <Box sx={ { p: 4, border: '1px solid', borderColor: 'divider' } }>
               <QuotedContainer position="overlay" author="Dieter Rams">
@@ -233,110 +249,6 @@ export const Documentation = {
             </Box>
           </Box>
         </Stack>
-
-        <SectionTitle title="Size Variants" description="네 가지 인용 부호 크기입니다." />
-        <Stack spacing={ 4 }>
-          <Box sx={ { p: 4, border: '1px solid', borderColor: 'divider' } }>
-            <Typography variant="caption" sx={ { mb: 2, display: 'block', color: 'text.secondary' } }>
-              Small (sm)
-            </Typography>
-            <QuotedContainer quoteSize="sm">
-              { sampleQuotes.short }
-            </QuotedContainer>
-          </Box>
-          <Box sx={ { p: 4, border: '1px solid', borderColor: 'divider' } }>
-            <Typography variant="caption" sx={ { mb: 2, display: 'block', color: 'text.secondary' } }>
-              Medium (md)
-            </Typography>
-            <QuotedContainer quoteSize="md">
-              { sampleQuotes.short }
-            </QuotedContainer>
-          </Box>
-          <Box sx={ { p: 4, border: '1px solid', borderColor: 'divider' } }>
-            <Typography variant="caption" sx={ { mb: 2, display: 'block', color: 'text.secondary' } }>
-              Large (lg) - Default
-            </Typography>
-            <QuotedContainer quoteSize="lg">
-              { sampleQuotes.short }
-            </QuotedContainer>
-          </Box>
-          <Box sx={ { p: 4, border: '1px solid', borderColor: 'divider' } }>
-            <Typography variant="caption" sx={ { mb: 2, display: 'block', color: 'text.secondary' } }>
-              Extra Large (xl)
-            </Typography>
-            <QuotedContainer quoteSize="xl">
-              { sampleQuotes.short }
-            </QuotedContainer>
-          </Box>
-        </Stack>
-
-        <SectionTitle title="Alignment" description="텍스트 정렬 옵션입니다." />
-        <Stack spacing={ 4 }>
-          <Box sx={ { p: 4, backgroundColor: 'grey.50' } }>
-            <QuotedContainer align="left" author="Steve Jobs">
-              Left aligned quote with author attribution.
-            </QuotedContainer>
-          </Box>
-          <Box sx={ { p: 4, backgroundColor: 'grey.50' } }>
-            <QuotedContainer align="center" position="inside" author="Albert Einstein">
-              Center aligned quote using inside position.
-            </QuotedContainer>
-          </Box>
-        </Stack>
-
-        <SectionTitle title="Animated Examples" description="스크롤하여 애니메이션을 확인하세요." />
-        <Box sx={ { height: 100 } } />
-        <Stack spacing={ 6 }>
-          <Box sx={ { p: 6, backgroundColor: 'grey.900' } }>
-            <QuotedContainer
-              animated
-              quoteColor="white"
-              author="Steve Jobs"
-              sx={ { color: 'white' } }
-            >
-              { sampleQuotes.short }
-            </QuotedContainer>
-          </Box>
-          <Box sx={ { p: 6, backgroundColor: 'primary.main' } }>
-            <QuotedContainer
-              animated
-              position="overlay"
-              quoteColor="rgba(255,255,255,0.3)"
-              author="Dieter Rams"
-              sx={ { color: 'white' } }
-            >
-              { sampleQuotes.long }
-            </QuotedContainer>
-          </Box>
-        </Stack>
-
-        <SectionTitle title="Usage Example" description="코드 사용 예시입니다." />
-        <Box
-          component="pre"
-          sx={ {
-            backgroundColor: 'grey.100',
-            p: 3,
-            fontSize: 13,
-            fontFamily: 'monospace',
-            overflow: 'auto',
-            lineHeight: 1.6,
-          } }
-        >
-          {`// 기본 사용
-<QuotedContainer author="Steve Jobs">
-  Design is how it works.
-</QuotedContainer>
-
-// Guillemet 스타일
-<QuotedContainer quoteStyle="guillemet" quoteSize="xl">
-  Less is more.
-</QuotedContainer>
-
-// Overlay 스타일 (배경 장식)
-<QuotedContainer position="overlay" animated>
-  Good design is as little design as possible.
-</QuotedContainer>`}
-        </Box>
       </PageContainer>
     </>
   ),

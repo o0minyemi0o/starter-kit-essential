@@ -60,9 +60,14 @@ pnpm lint             # ESLint 검사
 ### 컴포넌트 생성
 1. 요구사항 파악 → 기존 유사 컴포넌트 탐색
 2. project-directory-rules.mdc에 따라 위치 결정
-3. 구현 (MUI 기반, sx prop 사용)
-4. Storybook 스토리 작성
-5. 린트 확인
+3. **디자인 시스템 재활용 (MUST)**:
+   - 아이콘: Material Symbols 사용 (`src/stories/style/Icons.stories.jsx` 패턴 참고)
+   - 타이포그래피: MUI Typography 컴포넌트 사용
+   - 기본 컴포넌트: 기존 `src/components/` 내 컴포넌트 우선 활용
+   - 커스텀 SVG/아이콘 생성 금지 (Material Symbols에 없는 경우만 예외)
+4. 구현 (MUI 기반, sx prop 사용)
+5. Storybook 스토리 작성
+6. 린트 확인
 
 ### 컴포넌트 수정
 1. 현재 동작 파악
