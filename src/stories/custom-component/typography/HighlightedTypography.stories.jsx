@@ -8,7 +8,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { DocumentTitle, PageContainer, SectionTitle } from '../../../components/storybookDocumentation';
-import { HighlightedTypography, Highlight } from '../../../components/typography/HighlightedTypography';
+import { HighlightedTypography, Highlight } from '../../../components/typography';
 
 export default {
   title: 'Custom Component/Typography/HighlightedTypography',

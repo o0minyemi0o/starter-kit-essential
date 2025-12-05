@@ -8,7 +8,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { DocumentTitle, PageContainer, SectionTitle } from '../../../components/storybookDocumentation';
-import { Title } from '../../../components/typography/Title';
+import { Title } from '../../../components/typography';
 
 export default {
   title: 'Custom Component/Typography/Title',

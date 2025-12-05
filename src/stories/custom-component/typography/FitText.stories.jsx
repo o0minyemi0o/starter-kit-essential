@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { FitText } from '../../../components/typography/FitText';
+import { FitText } from '../../../components/typography';
 
 export default {
   title: 'Custom Component/Typography/FitText',

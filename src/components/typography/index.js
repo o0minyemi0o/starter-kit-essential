@@ -25,12 +25,10 @@ export {
   InlineImage,
 } from './InlineTypography';
 
-// StyledParagraph - 스타일링된 문단 (Lead, Editorial, Quote, Callout)
+// StyledParagraph - 스타일링된 문단 (Quote)
 export {
   StyledParagraph,
-  LeadParagraph,
   PullQuote,
-  Callout,
 } from './StyledParagraph';
 
 // QuotedContainer - 장식적 인용 부호가 있는 인용문

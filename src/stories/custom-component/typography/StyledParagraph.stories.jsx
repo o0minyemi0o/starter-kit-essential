@@ -11,7 +11,7 @@ import { DocumentTitle, PageContainer, SectionTitle } from '../../../components/
 import {
   StyledParagraph,
   PullQuote,
-} from '../../../components/typography/StyledParagraph';
+} from '../../../components/typography';
 
 export default {
   title: 'Custom Component/Typography/StyledParagraph',

@@ -8,7 +8,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { DocumentTitle, PageContainer, SectionTitle } from '../../../components/storybookDocumentation';
-import { StretchedHeadline, StretchedHeadlineMultiline } from '../../../components/typography/StretchedHeadline';
+import { StretchedHeadline, StretchedHeadlineMultiline } from '../../../components/typography';
 
 export default {
   title: 'Custom Component/Typography/StretchedHeadline',
