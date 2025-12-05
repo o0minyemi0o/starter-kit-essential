@@ -1,3 +1,3 @@
-export { DocumentTitle } from './DocumentTitle';
-export { PageContainer } from './PageContainer';
-export { SectionTitle } from './SectionTitle';
+export { DocumentTitle } from './DocumentTitle.jsx';
+export { PageContainer } from './PageContainer.jsx';
+export { SectionTitle } from './SectionTitle.jsx';

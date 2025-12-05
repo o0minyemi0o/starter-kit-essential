@@ -1,6 +1,3 @@
-export { StatsOverview } from './StatsOverview';
-export { MediaGridGallery } from './MediaGridGallery';
-export { TaskTableBoard } from './TaskTableBoard';
-export { ConfigFormSection } from './ConfigFormSection';
-export { UploadModal } from './UploadModal';
-export { FilterBar } from './FilterBar';
+export { MediaGridGallery } from './MediaGridGallery.jsx';
+export { UploadModal } from './UploadModal.jsx';
+export { FilterBar } from './FilterBar.jsx';

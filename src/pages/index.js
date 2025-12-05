@@ -1,2 +1,2 @@
-export { ArchivePage } from './ArchivePage';
-export { MoodboardsPage } from './MoodboardsPage';
+export { ArchivePage } from './ArchivePage.jsx';
+export { MoodboardsPage } from './MoodboardsPage.jsx';

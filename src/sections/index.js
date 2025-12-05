@@ -6,16 +6,16 @@
  */
 
 // 공통 섹션
-export { EmptyState } from './EmptyState';
-export { PageHeader } from './PageHeader';
-export { BoardSelectModal } from './BoardSelectModal';
+export { EmptyState } from './EmptyState.jsx';
+export { PageHeader } from './PageHeader.jsx';
+export { BoardSelectModal } from './BoardSelectModal.jsx';
 
 // Archive 페이지 섹션
-export { AssetGallery } from './AssetGallery';
-export { MobileUploadFab } from './MobileUploadFab';
+export { AssetGallery } from './AssetGallery.jsx';
+export { MobileUploadFab } from './MobileUploadFab.jsx';
 
 // Moodboards 페이지 섹션
-export { MoodboardGridView } from './MoodboardGridView';
-export { MoodboardDetailView } from './MoodboardDetailView';
-export { BoardActionsMenu } from './BoardActionsMenu';
-export { BoardDialogs } from './BoardDialogs';
+export { MoodboardGridView } from './MoodboardGridView.jsx';
+export { MoodboardDetailView } from './MoodboardDetailView.jsx';
+export { BoardActionsMenu } from './BoardActionsMenu.jsx';
+export { BoardDialogs } from './BoardDialogs.jsx';

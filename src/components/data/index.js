@@ -1,1 +1,1 @@
-export { ImageDetailModal } from './ImageDetailModal';
+export { ImageDetailModal } from './ImageDetailModal.jsx';

@@ -1,2 +1,2 @@
-export { default as WeatherDashboard } from './WeatherDashboard';
-export * from './weatherData';
+export { default as WeatherDashboard } from './WeatherDashboard.jsx';
+export * from './weatherData.js';

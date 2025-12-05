@@ -1,3 +1,3 @@
-export * from './PageContainer';
-export * from './SectionContainer';
+export * from './PageContainer.jsx';
+export * from './SectionContainer.jsx';
 

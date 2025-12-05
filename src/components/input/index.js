@@ -1,4 +1,4 @@
-export { SearchBar } from './SearchBar';
-export { FileDropzone } from './FileDropzone';
-export { TagInput } from './TagInput';
-export { CollectionDropdown } from './CollectionDropdown';
+export { SearchBar } from './SearchBar.jsx';
+export { FileDropzone } from './FileDropzone.jsx';
+export { TagInput } from './TagInput.jsx';
+export { CollectionDropdown } from './CollectionDropdown.jsx';

@@ -1,4 +1,4 @@
-export { NavMenu } from './NavMenu';
-export { AppShell } from './AppShell';
-export { GNB, useGNB } from './GNB';
-export { useAppShell } from './useAppShell';
+export { NavMenu } from './NavMenu.jsx';
+export { AppShell } from './AppShell.jsx';
+export { GNB, useGNB } from './GNB.jsx';
+export { useAppShell } from './useAppShell.js';

@@ -5,18 +5,18 @@
  * 각 테마는 MUI createTheme 규격을 따릅니다.
  */
 
-import defaultTheme from './default';
-import pixelModernismTheme from './pixel-modernism';
-import colorPixelTheme from './color-pixel';
-import grey3dTheme from './grey-3d';
-import aquaTheme from './aqua';
-import flatTheme from './flat';
-import materialTheme from './material';
-import glassmorphismTheme from './glassmorphism';
-import monolineDarkTheme from './monoline-dark';
-import neubrutalismTheme from './neubrutalism';
-import skeuomorphismTheme from './skeuomorphism';
-import liquidGlassTheme from './liquid-glass';
+import defaultTheme from './default.js';
+import pixelModernismTheme from './pixel-modernism.js';
+import colorPixelTheme from './color-pixel.js';
+import grey3dTheme from './grey-3d.js';
+import aquaTheme from './aqua.js';
+import flatTheme from './flat.js';
+import materialTheme from './material.js';
+import glassmorphismTheme from './glassmorphism.js';
+import monolineDarkTheme from './monoline-dark.js';
+import neubrutalismTheme from './neubrutalism.js';
+import skeuomorphismTheme from './skeuomorphism.js';
+import liquidGlassTheme from './liquid-glass.js';
 
 /** 사용 가능한 테마 목록 */
 export const themes = {
