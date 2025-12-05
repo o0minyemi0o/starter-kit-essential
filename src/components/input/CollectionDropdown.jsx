@@ -36,6 +36,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
  * @param {string} variant - 버튼 스타일 ('contained' | 'outlined' | 'text') [Optional, 기본값: 'contained']
  * @param {string} size - 버튼 크기 ('small' | 'medium' | 'large') [Optional, 기본값: 'medium']
  * @param {boolean} isFullWidth - 전체 너비 사용 [Optional, 기본값: false]
+ * @param {number} menuZIndex - 메뉴 z-index (모달 내부 사용 시 높은 값 필요) [Optional]
  * @param {object} sx - 추가 스타일 [Optional]
  *
  * Example usage:
@@ -55,6 +56,7 @@ export function CollectionDropdown({
   variant = 'contained',
   size = 'medium',
   isFullWidth = false,
+  menuZIndex,
   sx,
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -156,6 +158,7 @@ export function CollectionDropdown({
           vertical: 'top',
           horizontal: 'left',
         }}
+        sx={menuZIndex ? { zIndex: menuZIndex } : undefined}
         slotProps={{
           paper: {
             sx: {

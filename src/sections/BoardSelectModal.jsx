@@ -76,6 +76,7 @@ export function BoardSelectModal({
           buttonLabel={buttonLabel}
           variant="outlined"
           isFullWidth
+          menuZIndex={1500}
         />
       </Box>
     </Box>
