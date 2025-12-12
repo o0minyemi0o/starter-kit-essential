@@ -1,6 +1,8 @@
 import Box from '@mui/material/Box';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { MemoryRouter } from 'react-router-dom';
+import { LandingPage } from '../../pages/LandingPage';
 import { ArchivePage } from '../../pages/ArchivePage';
 import { MoodboardsPage } from '../../pages/MoodboardsPage';
 import { defaultTheme as theme } from '../../styles/themes';
@@ -20,6 +22,21 @@ function ThemeWrapper({ children }) {
   );
 }
 
+/**
+ * RouterThemeWrapper 컴포넌트
+ * 라우터가 필요한 페이지 스토리를 위한 래퍼 (LandingPage용)
+ */
+function RouterThemeWrapper({ children }) {
+  return (
+    <MemoryRouter>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        {children}
+      </ThemeProvider>
+    </MemoryRouter>
+  );
+}
+
 export default {
   title: 'Pages/MUSE',
   tags: ['autodocs'],
@@ -33,6 +50,7 @@ export default {
 MUSE 프로젝트의 전체 페이지 컴포넌트.
 
 ### 페이지 목록
+- **LandingPage**: 서비스 소개 랜딩 페이지
 - **ArchivePage**: 메인 대시보드 - 레퍼런스 아카이브 탐색 및 관리
 - **MoodboardsPage**: 무드보드 관리 및 큐레이션
 
@@ -40,16 +58,62 @@ MUSE 프로젝트의 전체 페이지 컴포넌트.
 각 페이지는 MainLayout 내에서 렌더링되며, React Router를 통해 네비게이션됩니다.
 
 \`\`\`jsx
+import { LandingPage } from './pages/LandingPage';
 import { ArchivePage } from './pages/ArchivePage';
 import { MoodboardsPage } from './pages/MoodboardsPage';
 
 <Routes>
   <Route element={<MainLayout />}>
-    <Route index element={<ArchivePage />} />
+    <Route index element={<LandingPage />} />
+    <Route path="archive" element={<ArchivePage />} />
     <Route path="moodboards" element={<MoodboardsPage />} />
   </Route>
 </Routes>
 \`\`\`
+        `,
+      },
+    },
+  },
+};
+
+/**
+ * Landing 페이지
+ *
+ * MUSE 서비스 소개 랜딩 페이지.
+ *
+ * 주요 구성:
+ * - Hero Section: 메인 메시지와 CTA
+ * - Problem-Solution Section: 문제 제기와 해결책 제시
+ * - Features Section: 4가지 핵심 기능 소개
+ * - Use Case Section: 워크플로우 예시 (수집 → 탐색 → 큐레이션 → 활용)
+ * - CTA Section: 최종 행동 유도
+ */
+export const Landing = {
+  render: () => (
+    <RouterThemeWrapper>
+      <LandingPage />
+    </RouterThemeWrapper>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: `
+### Landing 페이지
+
+MUSE 서비스를 소개하고 사용자를 Archive 페이지로 유도하는 랜딩 페이지입니다.
+
+**구성 요소:**
+- Hero Section (타이틀, 부제, CTA)
+- Problem-Solution Section (공감 유도 → 해결책 제시)
+- Features Section (4가지 핵심 기능 카드)
+- Use Case Section (수집 → 탐색 → 큐레이션 → 활용)
+- CTA Section (시작하기 버튼)
+
+**인터랙션:**
+1. Hero의 "시작하기" 버튼 클릭 → Archive 페이지 이동
+2. Features 카드 hover 시 translateY 효과
+3. Use Case 카드 hover 시 상승 효과 및 그림자
+4. 반응형 디자인 (xs/sm/md/lg 브레이크포인트)
         `,
       },
     },
