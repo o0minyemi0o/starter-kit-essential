@@ -26,7 +26,7 @@ import { NavMenu } from "../components/navigation/NavMenu";
  * 각 아이템에 id, label, icon, path를 정의
  */
 const navItems = [
-	{ id: "archive", label: "Archive", icon: <DashboardIcon />, path: "/" },
+	{ id: "archive", label: "Archive", icon: <DashboardIcon />, path: "/archive" },
 	{
 		id: "moodboards",
 		label: "Moodboards",
@@ -37,10 +37,11 @@ const navItems = [
 
 /**
  * 현재 경로에서 activeId 추출
+ * 루트 경로(/)일 때는 null 반환 (Landing page에서는 메뉴 active 없음)
  */
 const getActiveId = (pathname) => {
 	const item = navItems.find((item) => item.path === pathname);
-	return item?.id || "archive";
+	return item?.id || null;
 };
 
 function MainLayout() {

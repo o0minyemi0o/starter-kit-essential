@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
@@ -5,19 +6,22 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import CollectionsIcon from '@mui/icons-material/Collections';
 import { CustomCard } from './CustomCard';
+import { ImageTransition } from '../media/ImageTransition';
 
 /**
  * MoodboardCard 컴포넌트
  *
  * 무드보드 컬렉션을 표시하는 카드. CustomCard를 확장하여 구현.
- * 2×2 썸네일 그리드로 컬렉션 미리보기를 제공하고,
+ * ImageTransition을 사용하여 컬렉션 미리보기를 제공하고,
  * 무드보드의 메타데이터(이름, 설명, 아이템 수, 생성일)를 표시.
  *
  * 동작 방식:
- * 1. 썸네일 그리드: items 배열의 처음 4개 이미지를 2×2 그리드로 표시
- * 2. 이미지가 4개 미만일 경우: 빈 슬롯은 회색 배경으로 표시
- * 3. 이미지가 0개일 경우: 전체 placeholder 아이콘 표시
- * 4. Hover 시: 카드가 살짝 위로 이동하고 액션 버튼 표시
+ * 1. 기본 상태: 첫 번째 이미지 표시
+ * 2. Hover 시: 0.5초 간격으로 다음 이미지로 fade 트랜지션 (250ms)
+ * 3. Hover 중: 모든 이미지를 순환하며 자동 재생
+ * 4. Hover 해제: 첫 번째 이미지로 복귀
+ * 5. 이미지가 0개일 경우: placeholder 아이콘 표시
+ * 6. Hover 시 추가 효과: 카드가 살짝 위로 이동하고 액션 버튼 표시
  *
  * Props:
  * @param {string} id - 무드보드 ID [Required]
@@ -57,6 +61,30 @@ export function MoodboardCard({
   const thumbnailImages = items.slice(0, 4);
   const itemCount = items.length;
 
+  // Hover 인터랙션 상태
+  const [isHovered, setIsHovered] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  /**
+   * Hover 시 이미지 자동 순환 로직
+   * - hover 상태에서 0.5초 간격으로 다음 이미지로 전환
+   * - items.length만큼 순환 (modulo 연산)
+   * - hover 해제 시 첫 번째 이미지로 리셋
+   * - duration(250ms) + 여유시간(250ms) = 500ms interval
+   */
+  useEffect(() => {
+    if (isHovered && items.length > 1) {
+      const interval = setInterval(() => {
+        setCurrentImageIndex((prev) => (prev + 1) % items.length);
+      }, 500);
+
+      return () => clearInterval(interval);
+    } else {
+      // hover 해제 시 첫 번째 이미지로 리셋
+      setCurrentImageIndex(0);
+    }
+  }, [isHovered, items.length]);
+
   /**
    * 날짜 포맷팅 (YYYY-MM-DD → MMM DD, YYYY)
    */
@@ -71,86 +99,45 @@ export function MoodboardCard({
   };
 
   /**
-   * 2×2 썸네일 그리드 미디어 슬롯
-   * - 이미지가 있으면 4개 슬롯에 이미지 또는 빈 배경 표시
+   * 썸네일 미디어 슬롯
+   * - hover 시 ImageTransition으로 이미지 자동 순환
    * - 이미지가 없으면 placeholder 아이콘 표시
    */
-  const ThumbnailGrid = (
-    <Box
-      className="thumbnail-grid"
+  const ThumbnailMedia = items.length > 0 ? (
+    <ImageTransition
+      images={items.map((item) => ({
+        src: item.thumbnail || item.src?.medium || item.src,
+        alt: item.title || 'Moodboard item',
+      }))}
+      activeIndex={currentImageIndex}
+      transition="fade"
+      duration={250}
+      aspectRatio="1/1"
+      objectFit="cover"
       sx={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(2, 1fr)',
-        gridTemplateRows: 'repeat(2, 1fr)',
-        gap: '2px',
         width: '100%',
         height: '100%',
-        backgroundColor: 'grey.200',
-        transition: 'transform 0.3s ease',
+      }}
+    />
+  ) : (
+    // 이미지가 없는 경우: placeholder
+    <Box
+      sx={{
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'grey.100',
+        color: 'grey.400',
+        aspectRatio: '1/1',
       }}
     >
-      {thumbnailImages.length > 0 ? (
-        // 이미지가 있는 경우: 4개 슬롯 렌더링
-        [...Array(4)].map((_, index) => {
-          const image = thumbnailImages[index];
-          return (
-            <Box
-              key={index}
-              sx={{
-                position: 'relative',
-                overflow: 'hidden',
-                backgroundColor: 'grey.100',
-              }}
-            >
-              {image ? (
-                <Box
-                  component="img"
-                  src={image.thumbnail || image.src?.medium}
-                  alt={image.title || `Image ${index + 1}`}
-                  sx={{
-                    position: 'absolute',
-                    inset: 0,
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                  }}
-                />
-              ) : (
-                // 빈 슬롯
-                <Box
-                  sx={{
-                    position: 'absolute',
-                    inset: 0,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    backgroundColor: 'grey.100',
-                  }}
-                />
-              )}
-            </Box>
-          );
-        })
-      ) : (
-        // 이미지가 없는 경우: placeholder
-        <Box
-          sx={{
-            gridColumn: '1 / -1',
-            gridRow: '1 / -1',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: 'grey.100',
-            color: 'grey.400',
-          }}
-        >
-          <CollectionsIcon sx={{ fontSize: 48, mb: 1 }} />
-          <Typography variant="caption" color="inherit">
-            No images yet
-          </Typography>
-        </Box>
-      )}
+      <CollectionsIcon sx={{ fontSize: 48, mb: 1 }} />
+      <Typography variant="caption" color="inherit">
+        No images yet
+      </Typography>
     </Box>
   );
 
@@ -241,11 +228,13 @@ export function MoodboardCard({
   return (
     <CustomCard
       layout="vertical"
-      mediaSlot={ThumbnailGrid}
+      mediaSlot={ThumbnailMedia}
       mediaRatio="1/1"
       contentPadding="md"
       overlaySlot={OverlayContent}
       onClick={onClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       sx={{
         cursor: 'pointer',
         transition: 'transform 0.2s ease, box-shadow 0.2s ease',
@@ -256,9 +245,6 @@ export function MoodboardCard({
           boxShadow: '0 12px 24px -8px rgba(0,0,0,0.15)',
           '& .moodboard-actions': {
             opacity: 1,
-          },
-          '& .thumbnail-grid': {
-            transform: 'scale(1.02)',
           },
         },
         ...sx,
