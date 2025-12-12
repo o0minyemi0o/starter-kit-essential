@@ -13,6 +13,7 @@ import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import CollectionsIcon from '@mui/icons-material/Collections';
 import SearchOffIcon from '@mui/icons-material/SearchOff';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { landingPageContent } from '../data/landingPageContent';
 
 /**
  * LandingPage 컴포넌트
@@ -34,74 +35,37 @@ export function LandingPage() {
   const navigate = useNavigate();
 
   // ============================================
-  // 핵심 기능 데이터
+  // 콘텐츠 데이터 import
   // ============================================
-  const features = [
-    {
-      icon: <CloudUploadIcon sx={{ fontSize: 40, color: 'primary.main' }} />,
-      title: '레퍼런스 추가',
-      description: '파일 업로드와 동시에 카테고리/태그 정보를 입력하는 명확한 진입점 제공',
-    },
-    {
-      icon: <FolderIcon sx={{ fontSize: 40, color: 'primary.main' }} />,
-      title: '레퍼런스 카테고리',
-      description: '대분류 기준으로 이미지를 묶고 사이드바를 통해 쉽게 접근할 수 있는 네비게이션',
-    },
-    {
-      icon: <LocalOfferIcon sx={{ fontSize: 40, color: 'primary.main' }} />,
-      title: '키워드 관리',
-      description: '상세 태그를 이용해 리스트를 실시간으로 정제하는 유동적인 필터링 시스템',
-    },
-    {
-      icon: <CollectionsIcon sx={{ fontSize: 40, color: 'primary.main' }} />,
-      title: '무드보드 작성',
-      description: '선별된 아이템을 프로젝트 보드에 담아 새로운 컬렉션을 생성/편집',
-    },
-  ];
+  const { hero, usp, showcase, cta } = landingPageContent;
 
   // ============================================
-  // Use Case 데이터 - 워크플로우 예시
+  // 아이콘 매핑
   // ============================================
-  const useCaseSteps = [
-    {
-      time: '수집',
-      icon: <CloudUploadIcon sx={{ fontSize: 32 }} />,
-      title: '영감 수집',
-      scenario: '웹 서핑 중 발견한 좋은 이미지를',
-      action: '드래그 앤 드롭으로 즉시 MUSE에 저장합니다',
-      highlight: '카테고리와 태그를 함께 입력해 체계적으로 분류',
-    },
-    {
-      time: '탐색',
-      icon: <SearchOffIcon sx={{ fontSize: 32 }} />,
-      title: '프로젝트 시작',
-      scenario: '새 브랜딩 프로젝트를 시작할 때',
-      action: '"미니멀", "Blue 톤" 태그로 검색하여 필요한 레퍼런스만 필터링',
-      highlight: '수백 개 이미지 중 원하는 것만 즉시 찾기',
-    },
-    {
-      time: '큐레이션',
-      icon: <CollectionsIcon sx={{ fontSize: 32 }} />,
-      title: '무드보드 완성',
-      scenario: '선별된 이미지들을',
-      action: '"브랜딩 프로젝트 A" 보드로 정리하여 클라이언트에게 제안',
-      highlight: '체계적인 큐레이션으로 전문성 향상',
-    },
-    {
-      time: '활용',
-      icon: <CheckCircleIcon sx={{ fontSize: 32 }} />,
-      title: '반복 활용',
-      scenario: '아카이브는 계속 성장하며',
-      action: '다음 프로젝트에도 쉽게 재활용할 수 있는 자산이 됩니다',
-      highlight: '시간이 지날수록 가치있는 레퍼런스 라이브러리',
-    },
-  ];
+  const iconComponents = {
+    CloudUpload: CloudUploadIcon,
+    Folder: FolderIcon,
+    LocalOffer: LocalOfferIcon,
+    Collections: CollectionsIcon,
+    SearchOff: SearchOffIcon,
+    CheckCircle: CheckCircleIcon,
+  };
+
+  // 아이콘 생성 헬퍼 함수
+  const getIcon = (iconName, sx = {}) => {
+    const IconComponent = iconComponents[iconName];
+    return IconComponent ? <IconComponent sx={sx} /> : null;
+  };
 
   // ============================================
   // 이벤트 핸들러
   // ============================================
   const handleGetStarted = () => {
-    navigate('/archive');
+    navigate(hero.cta.action);
+  };
+
+  const handleCTAClick = () => {
+    navigate(cta.button.action);
   };
 
   // ============================================
@@ -112,7 +76,7 @@ export function LandingPage() {
       {/* Hero Section */}
       <Box
         sx={{
-          background: 'linear-gradient(135deg, #0000FF 0%, #000088 100%)',
+          background: hero.background.gradient,
           color: 'white',
           py: { xs: 8, md: 12 },
           textAlign: 'center',
@@ -128,7 +92,7 @@ export function LandingPage() {
               fontSize: { xs: '2.5rem', md: '3.75rem' },
             }}
           >
-            MUSE
+            {hero.title}
           </Typography>
           <Typography
             variant="h5"
@@ -139,7 +103,7 @@ export function LandingPage() {
               fontSize: { xs: '1.25rem', md: '1.5rem' },
             }}
           >
-            시각적 영감 아카이빙 솔루션
+            {hero.subtitle}
           </Typography>
           <Typography
             variant="body1"
@@ -151,8 +115,7 @@ export function LandingPage() {
               fontSize: { xs: '1rem', md: '1.125rem' },
             }}
           >
-            디자이너가 외부 웹/로컬에서 발견한 레퍼런스를 효율적으로 아카이빙하고,
-            태그 및 카테고리 기반으로 탐색하여 무드보드를 구축하는 개인화 SaaS
+            {hero.description}
           </Typography>
           <Button
             variant="contained"
@@ -171,7 +134,7 @@ export function LandingPage() {
               },
             }}
           >
-            시작하기
+            {hero.cta.label}
           </Button>
         </Container>
       </Box>
@@ -304,7 +267,7 @@ export function LandingPage() {
             fontSize: { xs: '2rem', md: '2.5rem' },
           }}
         >
-          핵심 기능
+          {usp.features.title}
         </Typography>
         <Typography
           variant="body1"
@@ -315,11 +278,11 @@ export function LandingPage() {
             fontSize: { xs: '1rem', md: '1.125rem' },
           }}
         >
-          MUSE가 제공하는 4가지 핵심 기능으로 효율적인 레퍼런스 관리를 경험하세요
+          {usp.features.subtitle}
         </Typography>
 
         <Grid container spacing={4}>
-          {features.map((feature, index) => (
+          {usp.features.items.map((feature, index) => (
             <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
               <Card
                 sx={{
@@ -334,7 +297,9 @@ export function LandingPage() {
                 }}
               >
                 <CardContent sx={{ flexGrow: 1, textAlign: 'center', p: 3 }}>
-                  <Box sx={{ mb: 2 }}>{feature.icon}</Box>
+                  <Box sx={{ mb: 2 }}>
+                    {getIcon(feature.icon, { fontSize: 48, color: 'primary.main' })}
+                  </Box>
                   <Typography
                     variant="h6"
                     component="h3"
@@ -365,7 +330,7 @@ export function LandingPage() {
               fontSize: { xs: '2rem', md: '2.5rem' },
             }}
           >
-            워크플로우 예시
+            {showcase.title}
           </Typography>
           <Typography
             variant="body1"
@@ -376,11 +341,11 @@ export function LandingPage() {
               fontSize: { xs: '1rem', md: '1.125rem' },
             }}
           >
-            레퍼런스 수집부터 무드보드 완성까지
+            {showcase.subtitle}
           </Typography>
 
           <Grid container spacing={4}>
-            {useCaseSteps.map((step, index) => (
+            {showcase.steps.map((step, index) => (
               <Grid size={{ xs: 12, sm: 6 }} key={index}>
                 <Card
                   sx={{
@@ -408,7 +373,7 @@ export function LandingPage() {
                         flexShrink: 0,
                       }}
                     >
-                      {step.icon}
+                      {getIcon(step.icon, { fontSize: 32 })}
                     </Box>
 
                     {/* Content */}
@@ -423,7 +388,7 @@ export function LandingPage() {
                           mb: 0.5,
                         }}
                       >
-                        {step.time}
+                        {step.stage}
                       </Typography>
                       <Typography
                         variant="h6"
@@ -489,7 +454,7 @@ export function LandingPage() {
             fontSize: { xs: '2rem', md: '2.5rem' },
           }}
         >
-          지금 시작하세요
+          {cta.title}
         </Typography>
         <Typography
           variant="body1"
@@ -499,13 +464,13 @@ export function LandingPage() {
             fontSize: { xs: '1rem', md: '1.125rem' },
           }}
         >
-          MUSE와 함께 더욱 효율적인 레퍼런스 관리와 창의적인 무드보드를 만들어보세요
+          {cta.description}
         </Typography>
         <Button
           variant="contained"
           size="large"
           endIcon={<ArrowForwardIcon />}
-          onClick={handleGetStarted}
+          onClick={handleCTAClick}
           sx={{
             px: 4,
             py: 1.5,
@@ -513,7 +478,7 @@ export function LandingPage() {
             fontWeight: 600,
           }}
         >
-          Archive 시작하기
+          {cta.button.label}
         </Button>
       </Container>
     </Box>
