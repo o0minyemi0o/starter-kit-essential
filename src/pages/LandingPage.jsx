@@ -11,6 +11,8 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import FolderIcon from '@mui/icons-material/Folder';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import CollectionsIcon from '@mui/icons-material/Collections';
+import SearchOffIcon from '@mui/icons-material/SearchOff';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 /**
  * LandingPage 컴포넌트
@@ -20,9 +22,10 @@ import CollectionsIcon from '@mui/icons-material/Collections';
  *
  * 페이지 구조:
  * 1. Hero Section - 메인 메시지와 CTA
- * 2. Features Section - 4가지 핵심 기능 소개
- * 3. Journey Section - 사용자 시나리오
- * 4. CTA Section - 시작하기 버튼
+ * 2. Problem-Solution Section - 문제 제기와 해결책
+ * 3. Features Section - 4가지 핵심 기능 소개
+ * 4. Use Case Section - 워크플로우 예시 (수집 → 탐색 → 큐레이션 → 활용)
+ * 5. CTA Section - 시작하기 버튼
  *
  * Example usage:
  * <LandingPage />
@@ -57,28 +60,40 @@ export function LandingPage() {
   ];
 
   // ============================================
-  // 사용자 여정 데이터
+  // Use Case 데이터 - 워크플로우 예시
   // ============================================
-  const journeySteps = [
+  const useCaseSteps = [
     {
-      step: '1',
-      title: '아이템 등록',
-      description: '웹 서핑 중 발견한 좋은 이미지를 MUSE에 업로드하여 자신의 아카이브에 추가',
+      time: '수집',
+      icon: <CloudUploadIcon sx={{ fontSize: 32 }} />,
+      title: '영감 수집',
+      scenario: '웹 서핑 중 발견한 좋은 이미지를',
+      action: '드래그 앤 드롭으로 즉시 MUSE에 저장합니다',
+      highlight: '카테고리와 태그를 함께 입력해 체계적으로 분류',
     },
     {
-      step: '2',
-      title: '영감 찾기',
-      description: '기존에 수집된 아카이브와 새로 추가한 이미지를 함께 탐색하며 시각적 방향성 설정',
+      time: '탐색',
+      icon: <SearchOffIcon sx={{ fontSize: 32 }} />,
+      title: '프로젝트 시작',
+      scenario: '새 브랜딩 프로젝트를 시작할 때',
+      action: '"미니멀", "Blue 톤" 태그로 검색하여 필요한 레퍼런스만 필터링',
+      highlight: '수백 개 이미지 중 원하는 것만 즉시 찾기',
     },
     {
-      step: '3',
-      title: '기준 설정',
-      description: '핵심 카테고리와 스타일 키워드를 적용하여 필요한 레퍼런스로 범위를 좁힘',
+      time: '큐레이션',
+      icon: <CollectionsIcon sx={{ fontSize: 32 }} />,
+      title: '무드보드 완성',
+      scenario: '선별된 이미지들을',
+      action: '"브랜딩 프로젝트 A" 보드로 정리하여 클라이언트에게 제안',
+      highlight: '체계적인 큐레이션으로 전문성 향상',
     },
     {
-      step: '4',
-      title: '무드보드 구축',
-      description: '선별된 이미지들을 하나의 프로젝트 보드로 모아 명확한 시각적 가이드라인 완성',
+      time: '활용',
+      icon: <CheckCircleIcon sx={{ fontSize: 32 }} />,
+      title: '반복 활용',
+      scenario: '아카이브는 계속 성장하며',
+      action: '다음 프로젝트에도 쉽게 재활용할 수 있는 자산이 됩니다',
+      highlight: '시간이 지날수록 가치있는 레퍼런스 라이브러리',
     },
   ];
 
@@ -161,6 +176,122 @@ export function LandingPage() {
         </Container>
       </Box>
 
+      {/* Problem-Solution Section */}
+      <Container maxWidth="lg" sx={{ py: { xs: 8, md: 12 } }}>
+        <Grid container spacing={6} alignItems="center">
+          {/* Problem */}
+          <Grid size={{ xs: 12, md: 6 }}>
+            <Box sx={{ textAlign: { xs: 'center', md: 'left' } }}>
+              <Typography
+                variant="overline"
+                sx={{
+                  color: 'error.main',
+                  fontWeight: 600,
+                  letterSpacing: 1,
+                  mb: 2,
+                  display: 'block',
+                }}
+              >
+                Problem
+              </Typography>
+              <Typography
+                variant="h4"
+                sx={{
+                  fontWeight: 700,
+                  mb: 3,
+                  fontSize: { xs: '1.75rem', md: '2rem' },
+                  lineHeight: 1.3,
+                }}
+              >
+                디자이너의 레퍼런스,<br />
+                폴더에 쌓여만 가고<br />
+                찾을 수 없나요?
+              </Typography>
+              <Typography
+                variant="body1"
+                color="text.secondary"
+                sx={{ mb: 3, fontSize: { xs: '1rem', md: '1.125rem' } }}
+              >
+                수백 개의 이미지가 폴더에 저장되어 있지만,
+                막상 필요할 때는 찾을 수 없는 경험.
+              </Typography>
+              <Typography
+                variant="body1"
+                color="text.secondary"
+                sx={{ fontSize: { xs: '1rem', md: '1.125rem' } }}
+              >
+                파일명으로는 기억나지 않고,
+                하나하나 열어보기엔 시간이 너무 오래 걸립니다.
+              </Typography>
+            </Box>
+          </Grid>
+
+          {/* Solution */}
+          <Grid size={{ xs: 12, md: 6 }}>
+            <Box sx={{ textAlign: { xs: 'center', md: 'left' } }}>
+              <Typography
+                variant="overline"
+                sx={{
+                  color: 'primary.main',
+                  fontWeight: 600,
+                  letterSpacing: 1,
+                  mb: 2,
+                  display: 'block',
+                }}
+              >
+                Solution
+              </Typography>
+              <Typography
+                variant="h4"
+                sx={{
+                  fontWeight: 700,
+                  mb: 3,
+                  fontSize: { xs: '1.75rem', md: '2rem' },
+                  lineHeight: 1.3,
+                }}
+              >
+                태그 기반 검색과<br />
+                카테고리 시스템으로<br />
+                즉시 찾는 레퍼런스
+              </Typography>
+              <Box component="ul" sx={{ pl: 0, listStyle: 'none' }}>
+                {[
+                  '태그로 검색: "미니멀", "Blue 톤" 같은 키워드로 즉시 필터링',
+                  '카테고리 분류: UI, 타이포그래피, 색상 등 체계적 정리',
+                  '무드보드 큐레이션: 프로젝트별로 선별된 이미지 모음',
+                ].map((item, index) => (
+                  <Box
+                    component="li"
+                    key={index}
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      mb: 2,
+                      gap: 1.5,
+                    }}
+                  >
+                    <CheckCircleIcon
+                      sx={{
+                        color: 'primary.main',
+                        fontSize: 24,
+                        flexShrink: 0,
+                        mt: 0.25,
+                      }}
+                    />
+                    <Typography
+                      variant="body1"
+                      sx={{ fontSize: { xs: '1rem', md: '1.125rem' } }}
+                    >
+                      {item}
+                    </Typography>
+                  </Box>
+                ))}
+              </Box>
+            </Box>
+          </Grid>
+        </Grid>
+      </Container>
+
       {/* Features Section */}
       <Container maxWidth="lg" sx={{ py: { xs: 8, md: 12 } }}>
         <Typography
@@ -221,7 +352,7 @@ export function LandingPage() {
         </Grid>
       </Container>
 
-      {/* Journey Section */}
+      {/* Use Case Section */}
       <Box sx={{ backgroundColor: 'grey.50', py: { xs: 8, md: 12 } }}>
         <Container maxWidth="lg">
           <Typography
@@ -234,7 +365,7 @@ export function LandingPage() {
               fontSize: { xs: '2rem', md: '2.5rem' },
             }}
           >
-            사용자 여정
+            워크플로우 예시
           </Typography>
           <Typography
             variant="body1"
@@ -245,48 +376,102 @@ export function LandingPage() {
               fontSize: { xs: '1rem', md: '1.125rem' },
             }}
           >
-            레퍼런스 관리부터 프로젝트 무드보드 완성까지
+            레퍼런스 수집부터 무드보드 완성까지
           </Typography>
 
-          <Grid container spacing={3}>
-            {journeySteps.map((step, index) => (
-              <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
-                <Box
+          <Grid container spacing={4}>
+            {useCaseSteps.map((step, index) => (
+              <Grid size={{ xs: 12, sm: 6 }} key={index}>
+                <Card
                   sx={{
-                    position: 'relative',
-                    textAlign: 'center',
+                    height: '100%',
                     p: 3,
+                    transition: 'transform 0.2s, box-shadow 0.2s',
+                    '&:hover': {
+                      transform: 'translateY(-4px)',
+                      boxShadow: 3,
+                    },
                   }}
                 >
-                  <Box
-                    sx={{
-                      width: 56,
-                      height: 56,
-                      borderRadius: '50%',
-                      backgroundColor: 'primary.main',
-                      color: 'white',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '1.5rem',
-                      fontWeight: 700,
-                      mx: 'auto',
-                      mb: 2,
-                    }}
-                  >
-                    {step.step}
+                  <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2 }}>
+                    {/* Icon */}
+                    <Box
+                      sx={{
+                        width: 56,
+                        height: 56,
+                        borderRadius: 2,
+                        backgroundColor: 'primary.light',
+                        color: 'primary.main',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexShrink: 0,
+                      }}
+                    >
+                      {step.icon}
+                    </Box>
+
+                    {/* Content */}
+                    <Box sx={{ flex: 1 }}>
+                      <Typography
+                        variant="overline"
+                        sx={{
+                          color: 'text.disabled',
+                          fontWeight: 600,
+                          letterSpacing: 0.5,
+                          display: 'block',
+                          mb: 0.5,
+                        }}
+                      >
+                        {step.time}
+                      </Typography>
+                      <Typography
+                        variant="h6"
+                        sx={{
+                          fontWeight: 700,
+                          mb: 1.5,
+                          fontSize: { xs: '1.125rem', md: '1.25rem' },
+                        }}
+                      >
+                        {step.title}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        sx={{ mb: 1, lineHeight: 1.6 }}
+                      >
+                        {step.scenario}{' '}
+                        <Box
+                          component="span"
+                          sx={{ fontWeight: 600, color: 'text.primary' }}
+                        >
+                          {step.action}
+                        </Box>
+                      </Typography>
+                      <Box
+                        sx={{
+                          display: 'inline-block',
+                          px: 1.5,
+                          py: 0.5,
+                          backgroundColor: 'primary.lighter',
+                          borderRadius: 1,
+                          mt: 1,
+                        }}
+                      >
+                        <Typography
+                          variant="caption"
+                          sx={{
+                            color: 'primary.dark',
+                            fontWeight: 600,
+                            fontSize: '0.75rem',
+                          }}
+                        >
+                          {step.highlight}
+                        </Typography>
+                      </Box>
+                    </Box>
                   </Box>
-                  <Typography
-                    variant="h6"
-                    component="h3"
-                    sx={{ fontWeight: 600, mb: 1 }}
-                  >
-                    {step.title}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {step.description}
-                  </Typography>
-                </Box>
+                </Card>
               </Grid>
             ))}
           </Grid>
