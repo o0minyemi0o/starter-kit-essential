@@ -10,6 +10,13 @@ export { EmptyState } from './EmptyState.jsx';
 export { PageHeader } from './PageHeader.jsx';
 export { BoardSelectModal } from './BoardSelectModal.jsx';
 
+// Landing 페이지 섹션
+export { LandingHero } from './LandingHero.jsx';
+export { LandingProblemSolution } from './LandingProblemSolution.jsx';
+export { LandingFeatures } from './LandingFeatures.jsx';
+export { LandingUseCase } from './LandingUseCase.jsx';
+export { LandingCTA } from './LandingCTA.jsx';
+
 // Archive 페이지 섹션
 export { AssetGallery } from './AssetGallery.jsx';
 export { MobileUploadFab } from './MobileUploadFab.jsx';
